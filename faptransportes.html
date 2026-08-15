@@ -4,34 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAP Transportes - Soluções Logísticas</title>
+    <meta name="description" content="Soluções logísticas completas para transporte rodoviário de cargas em todo o Brasil. Coleta programada, rastreamento em tempo real e entrega no prazo.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2316365c'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial' font-size='26' font-weight='bold' fill='%23ffffff'%3EFAP%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --navy-950: #081426;
+            --navy-900: #0c1e38;
+            --navy-800: #10294a;
+            --navy-700: #16365c;
+            --blue-600: #14538f;
+            --blue-500: #1565c0;
+            --blue-300: #8fb8dd;
+            --ink: #0b1d33;
+            --muted: #5b6b7f;
+            --surface: #f6f9fc;
+            --line: #e3eaf2;
+            --amber: #ffd98a;
+            --radius: 12px;
+            --ease-out: cubic-bezier(.2, .8, .2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 96px;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.65;
+            color: var(--ink);
+            background: #fff;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Header */
+        h1, h2, h3, .logo { font-family: 'IBM Plex Sans', 'Inter', sans-serif; }
+
+        ::selection { background: rgba(43, 147, 245, .25); }
+
+        /* ============ Barra de progresso do scroll ============ */
+        #scrollbar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 2px;
+            width: 0;
+            background: var(--blue-600);
+            z-index: 3000;
+            pointer-events: none;
+        }
+
+        /* ============ Header ============ */
         header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: rgba(8, 20, 38, .55);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
             z-index: 1000;
-            transition: all 0.3s ease;
+            transition: background .4s ease, box-shadow .4s ease;
         }
 
         header.scrolled {
-            background: rgba(255, 255, 255, 1);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+            background: rgba(8, 20, 38, .92);
+            box-shadow: 0 8px 30px rgba(4, 10, 20, .35);
         }
 
         nav {
@@ -40,879 +82,1266 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
+            padding: .9rem 2rem;
+            transition: padding .35s ease;
         }
+
+        header.scrolled nav { padding: .6rem 2rem; }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            font-size: 1.5rem;
+            gap: .7rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            color: #1e3a5f;
+            color: #fff;
             text-decoration: none;
+            letter-spacing: 0;
         }
 
-        .logo svg {
-            width: 32px;
-            height: 32px;
-        }
+        .logo svg { width: 34px; height: 34px; color: var(--blue-300); }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 2.4rem;
             list-style: none;
             align-items: center;
         }
 
         .nav-links a {
+            position: relative;
             text-decoration: none;
-            color: #333;
+            color: rgba(255, 255, 255, .82);
             font-weight: 500;
-            transition: color 0.3s ease;
+            font-size: .95rem;
+            padding: .3rem 0;
+            transition: color .3s ease;
         }
 
-        .nav-links a:hover {
-            color: #1e88e5;
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0; bottom: 0;
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, var(--blue-500), var(--blue-300));
+            border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .35s var(--ease-out);
         }
 
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
+        .nav-links a:hover { color: #fff; }
+        .nav-links a:hover::after { transform: scaleX(1); }
+
+        .nav-right { display: flex; align-items: center; gap: 1.4rem; }
 
         .phone {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            color: #333;
+            gap: .5rem;
+            color: rgba(255, 255, 255, .85);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: .92rem;
+            transition: color .3s ease;
         }
 
+        .phone:hover { color: var(--blue-300); }
+        .phone svg { width: 18px; height: 18px; }
+
         .btn-primary {
-            background: #1e88e5;
-            color: white;
-            padding: 0.75rem 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: .55rem;
+            background: #1565c0;
+            color: #fff;
+            padding: .8rem 1.6rem;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
+            font-size: .95rem;
             border: none;
             cursor: pointer;
+            transition: background .3s ease, transform .3s var(--ease-out), box-shadow .3s ease;
+            box-shadow: none;
         }
 
         .btn-primary:hover {
-            background: #1565c0;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(30, 136, 229, 0.3);
+            background: #0f4c96;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(21, 101, 192, .25);
         }
 
-        /* Hero Section */
+        .btn-primary:active { transform: translateY(0) scale(.98); }
+        .btn-primary svg { width: 18px; height: 18px; }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: .55rem;
+            background: rgba(255, 255, 255, .06);
+            color: #fff;
+            padding: .8rem 1.6rem;
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: .95rem;
+            backdrop-filter: blur(6px);
+            transition: background .3s ease, border-color .3s ease, transform .3s var(--ease-out);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, .14);
+            border-color: rgba(255, 255, 255, .5);
+            transform: translateY(-2px);
+        }
+
+        /* Menu mobile */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 6px;
+            width: 44px; height: 44px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1200;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 26px; height: 2px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 2px;
+            transition: transform .35s var(--ease-out), opacity .3s ease;
+        }
+
+        .nav-toggle.open span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
+        .nav-toggle.open span:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
+
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            background: rgba(8, 20, 38, .98);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            z-index: 1100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .35s ease;
+        }
+
+        .mobile-menu.open { opacity: 1; pointer-events: auto; }
+
+        .mobile-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity .4s ease, transform .4s var(--ease-out);
+        }
+
+        .mobile-menu.open a { opacity: 1; transform: none; }
+        .mobile-menu.open a:nth-child(1) { transition-delay: .05s; }
+        .mobile-menu.open a:nth-child(2) { transition-delay: .12s; }
+        .mobile-menu.open a:nth-child(3) { transition-delay: .19s; }
+        .mobile-menu.open a:nth-child(4) { transition-delay: .26s; }
+        .mobile-menu.open a:nth-child(5) { transition-delay: .33s; }
+
+        /* ============ Hero ============ */
         .hero {
-            margin-top: 80px;
-            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
-            color: white;
-            padding: 6rem 2rem 4rem;
             position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background:
+                radial-gradient(1100px 560px at 75% -10%, rgba(43, 147, 245, .10), transparent 65%),
+                linear-gradient(180deg, var(--navy-950) 0%, var(--navy-900) 55%, var(--navy-800) 100%);
+            color: #fff;
+            padding: 9rem 2rem 5rem;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
+        .hero-routes {
             position: absolute;
-            right: -10%;
-            top: 0;
-            width: 60%;
+            inset: 0;
+            width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><path d="M800 400c-100-50-200-100-300-50s-200 150-300 100" stroke="rgba(255,255,255,0.1)" stroke-width="2" fill="none"/></svg>');
-            opacity: 0.3;
+            pointer-events: none;
+            opacity: .8;
         }
+
+        .hero-routes path {
+            fill: none;
+            stroke: var(--blue-500);
+            stroke-width: 1.6;
+            stroke-dasharray: 6 16;
+            opacity: .12;
+            animation: routeDash 7s linear infinite;
+        }
+
+        .hero-routes path:nth-child(2) { animation-duration: 10s; opacity: .08; }
+
+        @keyframes routeDash { to { stroke-dashoffset: -220; } }
+
+        .hero-pin { fill: var(--blue-300); opacity: .5; }
 
         .hero-content {
             max-width: 1400px;
             margin: 0 auto;
+            width: 100%;
             position: relative;
             z-index: 1;
         }
 
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .hero-badge svg {
-            width: 16px;
-            height: 16px;
+        .hero .hero-overline {
+            font-size: .82rem;
+            font-weight: 600;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .55);
+            margin-bottom: 1.6rem;
+            opacity: 0;
+            animation: riseIn .8s var(--ease-out) .1s forwards;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
+            font-size: clamp(2.2rem, 4.8vw, 3.5rem);
+            line-height: 1.14;
+            letter-spacing: -.01em;
+            font-weight: 700;
+            margin-bottom: 1.6rem;
+            max-width: 900px;
         }
 
-        .hero h1 .highlight {
-            color: #42a5f5;
+        .hero h1 .w {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(26px);
+            animation: riseIn .75s var(--ease-out) forwards;
+            animation-delay: var(--d, 0s);
         }
+
+        @keyframes riseIn {
+            to { opacity: 1; transform: none; }
+        }
+
+        .highlight { color: inherit; }
 
         .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin-bottom: 2.5rem;
-            opacity: 0.95;
+            font-size: 1.15rem;
+            max-width: 640px;
+            margin-bottom: 2.6rem;
+            color: rgba(255, 255, 255, .72);
+            opacity: 0;
+            animation: riseIn .8s var(--ease-out) .75s forwards;
         }
 
         .hero-buttons {
             display: flex;
+            flex-wrap: wrap;
             gap: 1rem;
-            margin-bottom: 4rem;
+            margin-bottom: 4.5rem;
+            opacity: 0;
+            animation: riseIn .8s var(--ease-out) .9s forwards;
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border: 2px solid white;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
+        .hero-facts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.2rem;
+            border-top: 1px solid rgba(255, 255, 255, .12);
+            padding-top: 1.8rem;
+            opacity: 0;
+            animation: riseIn .8s var(--ease-out) 1.05s forwards;
         }
 
-        .btn-secondary:hover {
-            background: white;
-            color: #1e3a5f;
+        .fact {
+            display: flex;
+            align-items: center;
+            gap: .8rem;
         }
 
-        .feature-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 3rem;
+        .fact svg {
+            width: 26px; height: 26px;
+            color: var(--blue-300);
+            flex: none;
         }
 
-        .feature-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
+        .fact h3 { font-size: .95rem; font-weight: 600; margin: 0; }
+        .fact p { font-size: .82rem; color: rgba(255, 255, 255, .55); margin: 0; animation: none; opacity: 1; }
+
+        /* ============ Jornada (cena dirigida pelo scroll) ============ */
+        .journey {
+            position: relative;
+            height: 380vh;
+            background: var(--navy-950);
         }
 
-        .feature-card:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-5px);
+        .journey-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        .feature-card svg {
-            width: 40px;
-            height: 40px;
-            margin-bottom: 1rem;
-            color: #42a5f5;
+        .journey-sticky svg.scene {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
         }
 
-        .feature-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
+        .jr-label {
+            position: absolute;
+            top: 6.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            color: var(--blue-300);
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            z-index: 3;
         }
 
-        .feature-card p {
-            font-size: 0.9rem;
-            opacity: 0.8;
+        .jr-label::before, .jr-label::after {
+            content: '';
+            width: 28px; height: 1px;
+            background: rgba(124, 192, 255, .5);
         }
 
-        /* About Section */
-        .about {
-            padding: 6rem 2rem;
-            background: #f8f9fa;
-        }
-
-        .about-content {
-            max-width: 1400px;
-            margin: 0 auto;
+        .jr-caption {
+            position: absolute;
+            top: 22%;
+            left: 50%;
+            transform: translate(-50%, 14px);
             text-align: center;
+            width: min(760px, 88%);
+            opacity: 0;
+            z-index: 3;
+            will-change: opacity, transform;
         }
+
+        .jr-caption .kicker {
+            display: block;
+            color: var(--blue-300);
+            font-size: .85rem;
+            font-weight: 700;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            margin-bottom: .6rem;
+        }
+
+        .jr-caption h3 {
+            color: #fff;
+            font-size: clamp(1.7rem, 4.2vw, 2.8rem);
+            font-weight: 800;
+            letter-spacing: -.015em;
+            line-height: 1.15;
+            margin-bottom: .5rem;
+        }
+
+        .jr-caption p {
+            color: rgba(255, 255, 255, .65);
+            font-size: clamp(.95rem, 2vw, 1.15rem);
+        }
+
+        .jr-route {
+            position: absolute;
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(680px, 82%);
+            z-index: 3;
+        }
+
+        .jr-route-track {
+            position: relative;
+            height: 3px;
+            background: rgba(255, 255, 255, .14);
+            border-radius: 3px;
+        }
+
+        .jr-route-fill {
+            position: absolute;
+            left: 0; top: 0;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--blue-600), var(--blue-300));
+            border-radius: 3px;
+        }
+
+        .jr-dot {
+            position: absolute;
+            top: 50%;
+            width: 11px; height: 11px;
+            border-radius: 50%;
+            background: var(--navy-950);
+            border: 2px solid rgba(255, 255, 255, .35);
+            transform: translate(-50%, -50%);
+            transition: border-color .3s ease, background .3s ease;
+        }
+
+        .jr-dot.lit { background: var(--blue-500); border-color: var(--blue-300); }
+
+        .jr-marker {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translate(-50%, -58%);
+            width: 34px; height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--blue-500), #1565c0);
+            border-radius: 50%;
+            box-shadow: 0 4px 14px rgba(29, 127, 224, .5);
+        }
+
+        .jr-marker svg { width: 18px; height: 18px; color: #fff; }
+
+        .jr-done {
+            position: absolute;
+            bottom: calc(5% + 34px);
+            left: 50%;
+            transform: translate(-50%, 10px);
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            background: rgba(38, 176, 96, .14);
+            border: 1px solid rgba(75, 210, 130, .4);
+            color: #6fe0a0;
+            font-weight: 600;
+            font-size: .92rem;
+            padding: .55rem 1.2rem;
+            border-radius: 999px;
+            opacity: 0;
+            transition: opacity .5s ease, transform .5s var(--ease-out);
+            z-index: 3;
+        }
+
+        .jr-done.show { opacity: 1; transform: translate(-50%, 0); }
+        .jr-done svg { width: 16px; height: 16px; }
+
+        /* ============ Seções claras ============ */
+        .section { padding: 6.5rem 2rem; }
+        .section.alt { background: var(--surface); }
+
+        .section-inner { max-width: 1400px; margin: 0 auto; }
 
         .section-title {
-            font-size: 0.9rem;
-            color: #1e88e5;
-            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            font-size: .8rem;
+            color: var(--blue-600);
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: .16em;
             margin-bottom: 1rem;
         }
 
-        .about h2 {
-            font-size: 2.5rem;
-            color: #1e3a5f;
-            margin-bottom: 1.5rem;
+        .section h2 {
+            font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+            color: var(--ink);
+            letter-spacing: -.02em;
+            line-height: 1.2;
+            margin-bottom: 1.4rem;
+            max-width: 720px;
         }
 
-        .about h2 .highlight {
-            color: #1e88e5;
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-            color: #666;
-            max-width: 900px;
-            margin: 0 auto 3rem;
+        .section-text {
+            font-size: 1.08rem;
+            color: var(--muted);
+            max-width: 820px;
+            margin: 0 0 3.4rem;
             line-height: 1.8;
         }
 
+        /* Estatísticas */
         .stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.6rem;
             margin-bottom: 4rem;
         }
 
         .stat-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: transparent;
+            padding: 1.2rem 0 0;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            border-top: 2px solid var(--navy-700);
+            text-align: left;
         }
 
         .stat-number {
-            font-size: 3rem;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 2.6rem;
             font-weight: 700;
-            color: #1e3a5f;
-            margin-bottom: 0.5rem;
+            letter-spacing: -.02em;
+            color: var(--navy-700);
+            margin-bottom: .3rem;
         }
 
-        .stat-label {
-            color: #666;
-            font-size: 1rem;
-        }
+        .stat-label { color: var(--muted); font-size: .92rem; }
 
+        /* Missão / Visão / Valores */
         .values {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.6rem;
         }
 
         .value-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
+            background: #fff;
+            padding: 2.4rem 2rem;
+            border-radius: 14px;
+            border: 1px solid var(--line);
+            box-shadow: 0 1px 2px rgba(11, 29, 51, .04);
+            transition: box-shadow .35s ease, border-color .35s ease;
+            text-align: left;
         }
 
         .value-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            border-color: rgba(29, 127, 224, .45);
+            box-shadow: 0 10px 30px rgba(11, 29, 51, .08);
         }
 
         .value-icon {
-            width: 60px;
-            height: 60px;
-            background: #e3f2fd;
-            border-radius: 12px;
+            width: 58px; height: 58px;
+            background: #e8f2fd;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
+            margin-bottom: 1.4rem;
+            transition: background .35s ease;
         }
 
-        .value-card:hover .value-icon.missao {
-            background: #4caf50;
-        }
-
-        .value-card:hover .value-icon.missao svg {
-            color: white;
-        }
-
-        .value-card:hover .value-icon.visao {
-            background: #ffc107;
-        }
-
-        .value-card:hover .value-icon.visao svg {
-            color: white;
-        }
-
-        .value-card:hover .value-icon.valores {
-            background: #f44336;
-        }
-
-        .value-card:hover .value-icon.valores svg {
-            color: white;
+        .value-card:hover .value-icon {
+            background: #1565c0;
         }
 
         .value-icon svg {
-            width: 32px;
-            height: 32px;
-            color: #1e3a5f;
-            transition: all 0.3s ease;
+            width: 28px; height: 28px;
+            color: #1565c0;
+            transition: color .35s ease;
         }
 
-        .value-card h3 {
-            font-size: 1.5rem;
-            color: #1e3a5f;
-            margin-bottom: 1rem;
-        }
+        .value-card:hover .value-icon svg { color: #fff; }
 
-        .value-card p {
-            color: #666;
-            line-height: 1.6;
-        }
+        .value-card h3 { font-size: 1.35rem; color: var(--ink); margin-bottom: .7rem; }
+        .value-card p { color: var(--muted); font-size: .98rem; }
 
-        /* Services Section */
-        .services {
-            padding: 6rem 2rem;
-            background: white;
-        }
-
-        .services-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .services h2 {
-            font-size: 2.5rem;
-            color: #1e3a5f;
-            margin-bottom: 1.5rem;
-        }
-
-        .services h2 .highlight {
-            color: #1e88e5;
-        }
-
-        .services-text {
-            font-size: 1.1rem;
-            color: #666;
-            max-width: 800px;
-            margin: 0 auto 3rem;
-        }
-
+        /* Serviços */
         .service-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.6rem;
             margin-bottom: 3rem;
         }
 
         .service-card {
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 2rem;
+            position: relative;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 2.2rem 2rem;
             text-align: left;
-            transition: all 0.3s ease;
+            overflow: hidden;
+            transition: box-shadow .35s ease, border-color .35s ease;
         }
 
         .service-card:hover {
-            border-color: #1e88e5;
-            box-shadow: 0 8px 30px rgba(30, 136, 229, 0.15);
-            transform: translateY(-5px);
+            border-color: rgba(29, 127, 224, .45);
+            box-shadow: 0 10px 30px rgba(11, 29, 51, .08);
         }
 
         .service-icon {
-            width: 60px;
-            height: 60px;
-            background: #1e3a5f;
-            border-radius: 12px;
+            width: 58px; height: 58px;
+            background: #16365c;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.4rem;
+            transition: background .35s ease;
         }
 
-        .service-icon svg {
-            width: 32px;
-            height: 32px;
-            color: white;
+        .service-card:hover .service-icon {
+            background: #1565c0;
         }
 
-        .service-card h3 {
-            font-size: 1.5rem;
-            color: #1e3a5f;
-            margin-bottom: 1rem;
-        }
+        .service-icon svg { width: 28px; height: 28px; color: #fff; }
 
-        .service-card p {
-            color: #666;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
+        .service-card h3 { font-size: 1.35rem; color: var(--ink); margin-bottom: .7rem; }
 
-        .service-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
+        .service-card p { color: var(--muted); margin-bottom: 1.4rem; font-size: .98rem; }
+
+        .service-tags { display: flex; flex-wrap: wrap; gap: .5rem; }
 
         .tag {
-            background: #e3f2fd;
-            color: #1e88e5;
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            background: #eef2f7;
+            color: #33516e;
+            padding: .35rem .8rem;
+            border-radius: 999px;
+            font-size: .82rem;
             font-weight: 500;
+            transition: background .3s ease, color .3s ease;
         }
 
-        /* Contact Info Section */
-        .contact-info {
-            padding: 4rem 2rem;
-            background: white;
-        }
-
-        .contact-info-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .contact-info h2 {
-            font-size: 2.5rem;
-            color: #1e3a5f;
-            margin-bottom: 1rem;
-        }
-
-        .contact-info h2 .highlight {
-            color: #1e88e5;
-        }
-
-        .contact-info-text {
-            font-size: 1.1rem;
-            color: #666;
-            max-width: 800px;
-            margin: 0 auto 3rem;
-        }
-
+        /* Contato */
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 1.6rem;
+            margin-bottom: 3.4rem;
         }
 
         .info-card {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 12px;
-            text-align: left;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
             position: relative;
+            background: #fff;
+            padding: 2.1rem 1.9rem;
+            border-radius: 14px;
+            border: 1px solid var(--line);
+            text-align: left;
             overflow: hidden;
+            transition: transform .4s var(--ease-out), box-shadow .4s ease;
         }
 
         .info-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1e88e5 0%, #1e3a5f 100%);
+            inset: 0;
+            background: linear-gradient(135deg, var(--blue-600), var(--navy-800));
             opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: 0;
+            transition: opacity .4s ease;
         }
 
-        .info-card:hover::before {
-            opacity: 1;
-        }
+        .info-card:hover { transform: translateY(-8px); box-shadow: 0 20px 44px rgba(29, 127, 224, .28); }
+        .info-card:hover::before { opacity: 1; }
 
-        .info-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(30, 136, 229, 0.3);
-        }
-
-        .info-card > * {
-            position: relative;
-            z-index: 1;
-            transition: all 0.4s ease;
-        }
-
-        .info-card:hover .info-card-icon {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .info-card:hover .info-card-icon svg {
-            color: white;
-        }
-
-        .info-card:hover h3 {
-            color: white;
-        }
-
-        .info-card:hover p {
-            color: rgba(255, 255, 255, 0.95);
-        }
-
-        .info-card:hover a {
-            color: white;
-            text-decoration: underline;
-        }
+        .info-card > * { position: relative; z-index: 1; }
 
         .info-card-icon {
-            width: 50px;
-            height: 50px;
-            background: #e3f2fd;
-            border-radius: 10px;
+            width: 50px; height: 50px;
+            background: #e8f2fd;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 1.1rem;
+            transition: background .4s ease, transform .4s var(--ease-out);
         }
 
-        .info-card-icon svg {
-            width: 24px;
-            height: 24px;
-            color: #1e3a5f;
-            transition: all 0.4s ease;
+        .info-card:hover .info-card-icon {
+            background: rgba(255, 255, 255, .16);
+            transform: scale(1.08) rotate(5deg);
         }
 
-        .info-card h3 {
-            font-size: 1.3rem;
-            color: #1e3a5f;
-            margin-bottom: 1rem;
-            transition: all 0.4s ease;
-        }
+        .info-card-icon svg { width: 23px; height: 23px; color: var(--navy-700); transition: color .4s ease; }
+        .info-card:hover .info-card-icon svg { color: #fff; }
 
-        .info-card p {
-            color: #666;
-            line-height: 1.6;
-            transition: all 0.4s ease;
-        }
+        .info-card h3 { font-size: 1.18rem; color: var(--ink); margin-bottom: .7rem; transition: color .4s ease; }
+        .info-card:hover h3 { color: #fff; }
 
-        .info-card a {
-            color: #1e88e5;
-            text-decoration: none;
-            transition: all 0.4s ease;
-        }
+        .info-card p { color: var(--muted); font-size: .96rem; transition: color .4s ease; }
+        .info-card:hover p { color: rgba(255, 255, 255, .92); }
 
-        .map-section {
-            margin-top: 3rem;
-            text-align: center;
-        }
+        .info-card a { color: var(--blue-600); text-decoration: none; transition: color .4s ease; }
+        .info-card:hover a { color: #fff; text-decoration: underline; }
 
-        .map-section h3 {
-            font-size: 1.5rem;
-            color: #1e3a5f;
-            margin-bottom: 1.5rem;
-        }
+        .map-section { margin-top: 1rem; }
+
+        .map-section h3 { font-size: 1.45rem; color: var(--ink); margin-bottom: .6rem; }
+
+        .map-section > p { color: var(--muted); margin-bottom: 1.6rem; }
 
         .map-container {
-            border-radius: 12px;
+            border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            max-width: 900px;
-            margin: 0 auto;
+            border: 1px solid var(--line);
+            box-shadow: 0 10px 34px rgba(11, 29, 51, .1);
+            max-width: 960px;
+            margin: 0;
         }
 
         .map-container iframe {
             width: 100%;
             height: 400px;
             border: none;
+            display: block;
         }
 
         .whatsapp-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            background: #128c7e;
-            color: white;
-            padding: 1rem 2rem;
+            gap: .6rem;
+            background: #1fa855;
+            color: #fff;
+            padding: .95rem 2rem;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
-            margin-top: 1.5rem;
-            transition: all 0.3s ease;
+            margin-top: 1.8rem;
+            transition: background .3s ease, transform .3s var(--ease-out);
+            box-shadow: none;
         }
 
         .whatsapp-btn:hover {
-            background: #0d6e61;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(18, 140, 126, 0.3);
+            background: #178f47;
+            transform: translateY(-1px);
         }
 
-        /* Footer */
+        .whatsapp-btn svg { width: 21px; height: 21px; }
+
+        /* ============ Footer ============ */
         footer {
-            background: #1e3a5f;
-            color: white;
-            padding: 3rem 2rem 1.5rem;
+            background: var(--navy-950);
+            color: #fff;
+            padding: 4rem 2rem 1.6rem;
         }
 
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+        .footer-content { max-width: 1400px; margin: 0 auto; }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 2fr 1fr 1.2fr;
             gap: 3rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.6rem;
         }
 
         .footer-about h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .footer-about p {
-            opacity: 0.9;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            color: white;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            color: white;
+            gap: .6rem;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
         }
 
-        .social-links a:hover {
-            background: #1e88e5;
-            transform: translateY(-3px);
-        }
+        .footer-about h3 svg { width: 26px; height: 26px; color: var(--blue-300); }
 
-        .social-links svg {
-            width: 20px;
-            height: 20px;
-            color: white;
+        .footer-about p {
+            color: rgba(255, 255, 255, .65);
+            line-height: 1.8;
+            margin-bottom: 1.6rem;
+            max-width: 520px;
         }
 
         .footer-links h4 {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            color: white;
+            font-size: 1.02rem;
+            margin-bottom: 1.1rem;
+            font-family: 'IBM Plex Sans', sans-serif;
         }
 
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links ul li {
-            margin-bottom: 0.75rem;
-        }
+        .footer-links ul { list-style: none; }
+        .footer-links ul li { margin-bottom: .7rem; }
+        .footer-links li { color: rgba(255, 255, 255, .65); }
 
         .footer-links a {
-            color: white;
+            color: rgba(255, 255, 255, .65);
             text-decoration: none;
-            transition: color 0.3s ease;
-            opacity: 0.9;
+            transition: color .3s ease, padding-left .3s ease;
         }
 
-        .footer-links a:hover {
-            color: #42a5f5;
-            opacity: 1;
-        }
+        .footer-links a:hover { color: var(--blue-300); padding-left: 5px; }
 
         .footer-bottom {
             text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            opacity: 0.8;
+            padding-top: 1.8rem;
+            border-top: 1px solid rgba(255, 255, 255, .08);
+            color: rgba(255, 255, 255, .45);
+            font-size: .9rem;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .feature-cards {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .service-cards {
-                grid-template-columns: 1fr;
-            }
+        /* ============ Botão flutuante WhatsApp ============ */
+        .wa-float {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            width: 58px; height: 58px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(18, 140, 126, .45);
+            z-index: 900;
+            transition: transform .3s var(--ease-out);
         }
 
-        /* Scroll animations */
-        .fade-in {
+        .wa-float:hover { transform: scale(1.08); }
+        .wa-float svg { width: 30px; height: 30px; color: #fff; }
+
+        /* ============ Reveal on scroll ============ */
+        .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.6s ease;
+            transition: opacity .75s ease, transform .75s var(--ease-out);
+            transition-delay: var(--rd, 0s);
+            will-change: opacity, transform;
         }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .reveal.in { opacity: 1; transform: none; }
+
+        /* ============ Responsivo ============ */
+        @media (max-width: 900px) {
+            .nav-links, .nav-right .phone { display: none; }
+            .nav-toggle { display: flex; }
+            .nav-right .btn-primary { padding: .65rem 1.1rem; font-size: .88rem; }
+            .journey { height: 300vh; }
+            .jr-label { top: 5.2rem; }
+            .jr-caption { top: 19%; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2.2rem; }
+            .section { padding: 4.6rem 1.4rem; }
+            .hero { padding: 8rem 1.4rem 4.5rem; }
+            .hero-buttons { margin-bottom: 3rem; }
+            .hero-facts { gap: 1.2rem 1.8rem; }
+        }
+
+        @media (max-width: 480px) {
+            .service-cards { grid-template-columns: 1fr; }
+        }
+
+        /* ============ Movimento reduzido ============ */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+            .hero h1 .w, .hero .hero-overline, .hero p, .hero-buttons, .hero-facts { opacity: 1; transform: none; }
+            .reveal { opacity: 1; transform: none; }
+            .journey { height: 100vh; }
+            .jr-caption:first-of-type { opacity: 1; transform: translate(-50%, 0); }
         }
     </style>
 </head>
 <body>
+    <div id="scrollbar"></div>
+
     <!-- Header -->
     <header id="header">
         <nav>
             <a href="#inicio" class="logo">
-                <svg viewBox="0 0 24 24" fill="currentColor">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M18 18.5C18.83 18.5 19.5 17.83 19.5 17C19.5 16.17 18.83 15.5 18 15.5C17.17 15.5 16.5 16.17 16.5 17C16.5 17.83 17.17 18.5 18 18.5M19.5 9.5H17V12H21.46L19.5 9.5M6 18.5C6.83 18.5 7.5 17.83 7.5 17C7.5 16.17 6.83 15.5 6 15.5C5.17 15.5 4.5 16.17 4.5 17C4.5 17.83 5.17 18.5 6 18.5M20 8L23 12V17H21C21 18.66 19.66 20 18 20C16.34 20 15 18.66 15 17H9C9 18.66 7.66 20 6 20C4.34 20 3 18.66 3 17H1V6C1 4.89 1.89 4 3 4H17V8H20M3 6V15H3.76C4.31 14.39 5.11 14 6 14C6.89 14 7.69 14.39 8.24 15H15V6H3Z"/>
                 </svg>
                 FAP Transportes
             </a>
             <ul class="nav-links">
                 <li><a href="#inicio">Início</a></li>
+                <li><a href="#jornada">A Jornada</a></li>
                 <li><a href="#sobre">Sobre</a></li>
                 <li><a href="#servicos">Serviços</a></li>
                 <li><a href="#contato">Contato</a></li>
             </ul>
             <div class="nav-right">
-                <a href="tel:1123825644" class="phone">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <a href="tel:+551123825644" class="phone">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                     </svg>
                     (11) 2382-5644
                 </a>
-                <a href="https://wa.me/5511983191627?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento." target="_blank" class="btn-primary">Solicitar Orçamento</a>
+                <a href="https://wa.me/5511983191627?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento." target="_blank" rel="noopener" class="btn-primary">Solicitar Orçamento</a>
+                <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </nav>
     </header>
 
-    <!-- Hero Section -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#inicio">Início</a>
+        <a href="#jornada">A Jornada</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#contato">Contato</a>
+    </div>
+
+    <!-- Hero -->
     <section class="hero" id="inicio">
+        <svg class="hero-routes" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <path d="M-40 620 C 260 480, 520 700, 820 520 S 1300 380, 1500 460"/>
+            <path d="M-40 300 C 300 420, 640 220, 980 330 S 1360 260, 1500 180"/>
+            <g>
+                <circle class="hero-pin" cx="820" cy="520" r="4"/>
+                <circle class="hero-pin" cx="300" cy="420" r="4"/>
+                <circle class="hero-pin" cx="1180" cy="300" r="4"/>
+            </g>
+        </svg>
+
         <div class="hero-content">
-            <div class="hero-badge">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                </svg>
-                Há mais de 15 anos conectando o Brasil
-            </div>
+            <p class="hero-overline">Transporte rodoviário de cargas · Guarulhos, SP</p>
             <h1>
-                Conectando cargas com<br>
-                <span class="highlight">eficiência</span>, <span class="highlight">segurança</span> e<br>
-                <span class="highlight">pontualidade</span>
+                <span class="w" style="--d:.15s">Conectando cargas com</span><br>
+                <span class="w" style="--d:.3s"><span class="highlight">eficiência,</span> <span class="highlight">segurança</span> e</span><br>
+                <span class="w" style="--d:.45s"><span class="highlight">pontualidade</span></span>
             </h1>
             <p>Soluções logísticas completas para transporte rodoviário de cargas em todo território nacional. Sua carga em boas mãos.</p>
             <div class="hero-buttons">
-                <a href="https://wa.me/5511983191627?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento." target="_blank" class="btn-primary">
-                    Solicitar Orçamento 
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <a href="https://wa.me/5511983191627?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento." target="_blank" rel="noopener" class="btn-primary">
+                    Solicitar Orçamento
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
                 </a>
-                <a href="#servicos" class="btn-secondary">Nossos Serviços</a>
+                <a href="#servicos" class="btn-ghost">Nossos Serviços</a>
             </div>
 
-            <div class="feature-cards">
-                <div class="feature-card fade-in">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            <div class="hero-facts">
+                <div class="fact">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
                     </svg>
-                    <h3>Pontualidade</h3>
-                    <p>Entregas no prazo</p>
+                    <div>
+                        <h3>Pontualidade</h3>
+                        <p>Entregas no prazo</p>
+                    </div>
                 </div>
-                <div class="feature-card fade-in">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
+                <div class="fact">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
                     </svg>
-                    <h3>Segurança</h3>
-                    <p>Carga protegida</p>
+                    <div>
+                        <h3>Segurança</h3>
+                        <p>Carga protegida</p>
+                    </div>
                 </div>
-                <div class="feature-card fade-in">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18 18.5C18.83 18.5 19.5 17.83 19.5 17C19.5 16.17 18.83 15.5 18 15.5C17.17 15.5 16.5 16.17 16.5 17C16.5 17.83 17.17 18.5 18 18.5M19.5 9.5H17V12H21.46L19.5 9.5M6 18.5C6.83 18.5 7.5 17.83 7.5 17C7.5 16.17 6.83 15.5 6 15.5C5.17 15.5 4.5 16.17 4.5 17C4.5 17.83 5.17 18.5 6 18.5M20 8L23 12V17H21C21 18.66 19.66 20 18 20C16.34 20 15 18.66 15 17H9C9 18.66 7.66 20 6 20C4.34 20 3 18.66 3 17H1V6C1 4.89 1.89 4 3 4H17V8H20M3 6V15H3.76C4.31 14.39 5.11 14 6 14C6.89 14 7.69 14.39 8.24 15H15V6H3Z"/>
+                <div class="fact">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                     </svg>
-                    <h3>Rastreamento</h3>
-                    <p>Em tempo real</p>
+                    <div>
+                        <h3>Rastreamento</h3>
+                        <p>Em tempo real</p>
+                    </div>
                 </div>
-                <div class="feature-card fade-in">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
+                <div class="fact">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                     </svg>
-                    <h3>Suporte 24h</h3>
-                    <p>Sempre disponível</p>
+                    <div>
+                        <h3>Suporte 24h</h3>
+                        <p>Sempre disponível</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about" id="sobre">
-        <div class="about-content">
-            <div class="section-title">QUEM SOMOS</div>
-            <h2>Mais de 15 anos conectando <span class="highlight">o Brasil</span></h2>
-            <p class="about-text">
-                A FAP Transportes nasceu da paixão pelo transporte e do compromisso com a excelência. 
-                Desde 2009, oferecemos soluções logísticas completas para empresas de todos os portes, 
+    <!-- Jornada: cena do caminhão dirigida pelo scroll -->
+    <section class="journey" id="jornada">
+        <div class="journey-sticky">
+            <svg class="scene" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+                <defs>
+                    <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="#071223"/>
+                        <stop offset=".55" stop-color="#0d2342"/>
+                        <stop offset=".8" stop-color="#1c3f6b"/>
+                        <stop offset="1" stop-color="#2b5a8f"/>
+                    </linearGradient>
+                    <radialGradient id="glowG" cx=".5" cy=".5" r=".5">
+                        <stop offset="0" stop-color="#3b74b8" stop-opacity=".55"/>
+                        <stop offset="1" stop-color="#3b74b8" stop-opacity="0"/>
+                    </radialGradient>
+                    <linearGradient id="cabG" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="#2b93f5"/>
+                        <stop offset="1" stop-color="#1565c0"/>
+                    </linearGradient>
+                    <linearGradient id="beamG" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0" stop-color="#ffd98a" stop-opacity=".55"/>
+                        <stop offset="1" stop-color="#ffd98a" stop-opacity="0"/>
+                    </linearGradient>
+
+                    <!-- Faixa do horizonte (repete a cada 2880px) -->
+                    <g id="farSet">
+                        <circle cx="140" cy="120" r="1.6" fill="#fff" opacity=".45"/>
+                        <circle cx="360" cy="80" r="1.3" fill="#fff" opacity=".35"/>
+                        <circle cx="560" cy="170" r="1.8" fill="#fff" opacity=".5"/>
+                        <circle cx="820" cy="60" r="1.4" fill="#fff" opacity=".4"/>
+                        <circle cx="1080" cy="140" r="1.5" fill="#fff" opacity=".35"/>
+                        <circle cx="1320" cy="90" r="1.7" fill="#fff" opacity=".45"/>
+                        <circle cx="1560" cy="160" r="1.3" fill="#fff" opacity=".4"/>
+                        <circle cx="1840" cy="70" r="1.6" fill="#fff" opacity=".5"/>
+                        <circle cx="2100" cy="130" r="1.4" fill="#fff" opacity=".35"/>
+                        <circle cx="2380" cy="90" r="1.7" fill="#fff" opacity=".45"/>
+                        <circle cx="2620" cy="150" r="1.3" fill="#fff" opacity=".4"/>
+                        <circle cx="2790" cy="110" r="1.5" fill="#fff" opacity=".35"/>
+
+                        <rect x="0" y="430" width="140" height="130" fill="#142f52"/>
+                        <rect x="160" y="380" width="110" height="180" fill="#142f52"/>
+                        <rect x="290" y="450" width="90" height="110" fill="#142f52"/>
+                        <rect x="400" y="350" width="150" height="210" fill="#142f52"/>
+                        <line x1="475" y1="350" x2="475" y2="316" stroke="#142f52" stroke-width="4"/>
+                        <rect x="570" y="420" width="120" height="140" fill="#142f52"/>
+                        <rect x="710" y="390" width="100" height="170" fill="#142f52"/>
+                        <rect x="830" y="460" width="140" height="100" fill="#142f52"/>
+                        <rect x="990" y="340" width="130" height="220" fill="#142f52"/>
+                        <rect x="1140" y="430" width="100" height="130" fill="#142f52"/>
+                        <rect x="1260" y="380" width="150" height="180" fill="#142f52"/>
+                        <rect x="1430" y="450" width="110" height="110" fill="#142f52"/>
+                        <rect x="1560" y="360" width="140" height="200" fill="#142f52"/>
+                        <line x1="1630" y1="360" x2="1630" y2="330" stroke="#142f52" stroke-width="4"/>
+                        <rect x="1720" y="440" width="120" height="120" fill="#142f52"/>
+                        <rect x="1860" y="400" width="100" height="160" fill="#142f52"/>
+                        <rect x="1980" y="340" width="160" height="220" fill="#142f52"/>
+                        <rect x="2160" y="430" width="120" height="130" fill="#142f52"/>
+                        <rect x="2300" y="390" width="110" height="170" fill="#142f52"/>
+                        <rect x="2430" y="460" width="140" height="100" fill="#142f52"/>
+                        <rect x="2590" y="370" width="130" height="190" fill="#142f52"/>
+                        <rect x="2740" y="440" width="140" height="120" fill="#142f52"/>
+
+                        <rect x="420" y="380" width="9" height="11" fill="#ffd98a" opacity=".32"/>
+                        <rect x="460" y="420" width="9" height="11" fill="#ffd98a" opacity=".28"/>
+                        <rect x="1010" y="370" width="9" height="11" fill="#ffd98a" opacity=".3"/>
+                        <rect x="1060" y="430" width="9" height="11" fill="#ffd98a" opacity=".26"/>
+                        <rect x="1290" y="410" width="9" height="11" fill="#ffd98a" opacity=".3"/>
+                        <rect x="1590" y="390" width="9" height="11" fill="#ffd98a" opacity=".3"/>
+                        <rect x="2010" y="370" width="9" height="11" fill="#ffd98a" opacity=".32"/>
+                        <rect x="2060" y="420" width="9" height="11" fill="#ffd98a" opacity=".26"/>
+                        <rect x="2330" y="420" width="9" height="11" fill="#ffd98a" opacity=".3"/>
+                        <rect x="2620" y="400" width="9" height="11" fill="#ffd98a" opacity=".28"/>
+                    </g>
+
+                    <!-- Faixa próxima: galpões, árvores e postes (repete a cada 2880px) -->
+                    <g id="midSet">
+                        <path d="M60 560 v-80 l90 -26 l90 26 v80 z" fill="#0d2038"/>
+                        <rect x="420" y="482" width="140" height="78" fill="#0d2038"/>
+                        <path d="M900 560 v-90 l100 -30 l100 30 v90 z" fill="#0d2038"/>
+                        <rect x="1400" y="482" width="160" height="78" fill="#0d2038"/>
+                        <path d="M1900 560 v-84 l95 -28 l95 28 v84 z" fill="#0d2038"/>
+                        <rect x="2400" y="484" width="150" height="76" fill="#0d2038"/>
+
+                        <rect x="316" y="518" width="8" height="42" fill="#0d2038"/>
+                        <ellipse cx="320" cy="500" rx="27" ry="32" fill="#0d2038"/>
+                        <rect x="696" y="514" width="8" height="46" fill="#0d2038"/>
+                        <ellipse cx="700" cy="494" rx="30" ry="35" fill="#0d2038"/>
+                        <rect x="1196" y="518" width="8" height="42" fill="#0d2038"/>
+                        <ellipse cx="1200" cy="500" rx="27" ry="32" fill="#0d2038"/>
+                        <rect x="1696" y="514" width="8" height="46" fill="#0d2038"/>
+                        <ellipse cx="1700" cy="494" rx="30" ry="35" fill="#0d2038"/>
+                        <rect x="2246" y="518" width="8" height="42" fill="#0d2038"/>
+                        <ellipse cx="2250" cy="500" rx="27" ry="32" fill="#0d2038"/>
+                        <rect x="2696" y="516" width="8" height="44" fill="#0d2038"/>
+                        <ellipse cx="2700" cy="496" rx="28" ry="33" fill="#0d2038"/>
+
+                        <g id="lampSet">
+                            <rect x="198" y="440" width="4" height="120" fill="#122c4e"/>
+                            <circle cx="200" cy="436" r="16" fill="#ffd98a" opacity=".1"/>
+                            <circle cx="200" cy="436" r="5" fill="#ffd98a" opacity=".85"/>
+                        </g>
+                        <use href="#lampSet" x="360"/>
+                        <use href="#lampSet" x="720"/>
+                        <use href="#lampSet" x="1080"/>
+                        <use href="#lampSet" x="1440"/>
+                        <use href="#lampSet" x="1800"/>
+                        <use href="#lampSet" x="2160"/>
+                        <use href="#lampSet" x="2520"/>
+                    </g>
+                </defs>
+
+                <!-- Céu -->
+                <rect x="0" y="0" width="1440" height="562" fill="url(#skyG)"/>
+                <ellipse cx="720" cy="562" rx="920" ry="130" fill="url(#glowG)"/>
+                <circle cx="1250" cy="118" r="70" fill="#dfe9f5" opacity=".07"/>
+                <circle cx="1250" cy="118" r="44" fill="#dfe9f5" opacity=".85"/>
+                <circle cx="1236" cy="106" r="9" fill="#c3d3e6" opacity=".7"/>
+                <circle cx="1262" cy="132" r="6" fill="#c3d3e6" opacity=".6"/>
+
+                <!-- Horizonte (parallax lento) -->
+                <g id="farStrip">
+                    <use href="#farSet"/>
+                    <use href="#farSet" x="2880"/>
+                </g>
+
+                <!-- Plano médio (parallax médio) -->
+                <g id="midStrip">
+                    <use href="#midSet"/>
+                    <use href="#midSet" x="2880"/>
+                </g>
+
+                <!-- Estrada -->
+                <rect x="0" y="560" width="1440" height="140" fill="#091425"/>
+                <line x1="0" y1="563" x2="1440" y2="563" stroke="#2a4a74" stroke-width="2"/>
+                <g id="dashStrip">
+                    <line x1="-160" y1="648" x2="6000" y2="648" stroke="#8fc4ff" stroke-width="6" stroke-dasharray="70 80" opacity=".45"/>
+                </g>
+
+                <!-- Caminhão -->
+                <g id="truck" transform="translate(150,0)">
+                    <ellipse cx="240" cy="606" rx="255" ry="13" fill="#000" opacity=".38"/>
+                    <g id="truckBody">
+                        <polygon points="474,516 780,554 780,614 474,542" fill="url(#beamG)" opacity=".3"/>
+                        <rect x="20" y="372" width="330" height="168" rx="12" fill="#f2f6fb" stroke="#c9d6e4" stroke-width="2"/>
+                        <line x1="103" y1="380" x2="103" y2="532" stroke="#dfe8f1" stroke-width="2"/>
+                        <line x1="186" y1="380" x2="186" y2="532" stroke="#dfe8f1" stroke-width="2"/>
+                        <line x1="269" y1="380" x2="269" y2="532" stroke="#dfe8f1" stroke-width="2"/>
+                        <rect x="20" y="506" width="330" height="16" fill="#1d7fe0"/>
+                        <text x="185" y="450" text-anchor="middle" font-family="Sora, Arial, sans-serif" font-size="44" font-weight="800" fill="#16365c" letter-spacing="2">FAP</text>
+                        <text x="185" y="484" text-anchor="middle" font-family="Sora, Arial, sans-serif" font-size="19" font-weight="700" fill="#1d7fe0" letter-spacing="6">TRANSPORTES</text>
+                        <rect x="14" y="516" width="7" height="16" rx="2" fill="#ff5a5a"/>
+                        <rect x="352" y="520" width="118" height="24" rx="4" fill="#0c1a2e"/>
+                        <rect x="356" y="438" width="9" height="84" rx="3" fill="#24466f"/>
+                        <path d="M366 540 v-96 q0 -14 14 -14 h42 q26 0 40 20 l15 23 q6 9 6 20 v47 z" fill="url(#cabG)" stroke="#10345c" stroke-width="2"/>
+                        <path d="M384 444 h34 q17 0 27 13 l11 17 h-72 z" fill="#bfe0ff" opacity=".95"/>
+                        <line x1="420" y1="478" x2="420" y2="536" stroke="#10345c" stroke-width="2" opacity=".55"/>
+                        <rect x="426" y="492" width="14" height="4" rx="2" fill="#0e2c50"/>
+                        <circle cx="470" cy="524" r="7" fill="#ffd98a"/>
+                        <rect x="462" y="534" width="16" height="15" rx="4" fill="#10345c"/>
+                    </g>
+                    <g class="wheel" data-cx="90" data-cy="562">
+                        <circle cx="90" cy="562" r="38" fill="#0b1729" stroke="#050b14" stroke-width="3"/>
+                        <circle cx="90" cy="562" r="21" fill="#1d3a63"/>
+                        <line x1="90" y1="543" x2="90" y2="581" stroke="#7cc0ff" stroke-width="4"/>
+                        <line x1="73.5" y1="552.5" x2="106.5" y2="571.5" stroke="#7cc0ff" stroke-width="4"/>
+                        <line x1="73.5" y1="571.5" x2="106.5" y2="552.5" stroke="#7cc0ff" stroke-width="4"/>
+                        <circle cx="90" cy="562" r="7" fill="#cfe4ff"/>
+                    </g>
+                    <g class="wheel" data-cx="162" data-cy="562">
+                        <circle cx="162" cy="562" r="38" fill="#0b1729" stroke="#050b14" stroke-width="3"/>
+                        <circle cx="162" cy="562" r="21" fill="#1d3a63"/>
+                        <line x1="162" y1="543" x2="162" y2="581" stroke="#7cc0ff" stroke-width="4"/>
+                        <line x1="145.5" y1="552.5" x2="178.5" y2="571.5" stroke="#7cc0ff" stroke-width="4"/>
+                        <line x1="145.5" y1="571.5" x2="178.5" y2="552.5" stroke="#7cc0ff" stroke-width="4"/>
+                        <circle cx="162" cy="562" r="7" fill="#cfe4ff"/>
+                    </g>
+                    <g class="wheel" data-cx="394" data-cy="562">
+                        <circle cx="394" cy="562" r="38" fill="#0b1729" stroke="#050b14" stroke-width="3"/>
+                        <circle cx="394" cy="562" r="21" fill="#1d3a63"/>
+                        <line x1="394" y1="543" x2="394" y2="581" stroke="#7cc0ff" stroke-width="4"/>
+                        <line x1="377.5" y1="552.5" x2="410.5" y2="571.5" stroke="#7cc0ff" stroke-width="4"/>
+                        <line x1="377.5" y1="571.5" x2="410.5" y2="552.5" stroke="#7cc0ff" stroke-width="4"/>
+                        <circle cx="394" cy="562" r="7" fill="#cfe4ff"/>
+                    </g>
+                    <g class="wheel" data-cx="450" data-cy="566">
+                        <circle cx="450" cy="566" r="34" fill="#0b1729" stroke="#050b14" stroke-width="3"/>
+                        <circle cx="450" cy="566" r="18" fill="#1d3a63"/>
+                        <line x1="450" y1="549" x2="450" y2="583" stroke="#7cc0ff" stroke-width="4"/>
+                        <line x1="435.5" y1="557.5" x2="464.5" y2="574.5" stroke="#7cc0ff" stroke-width="4"/>
+                        <line x1="435.5" y1="574.5" x2="464.5" y2="557.5" stroke="#7cc0ff" stroke-width="4"/>
+                        <circle cx="450" cy="566" r="6" fill="#cfe4ff"/>
+                    </g>
+                </g>
+            </svg>
+
+            <span class="jr-label">A jornada da sua carga</span>
+
+            <div class="jr-caption" data-from="0.04" data-to="0.24">
+                <span class="kicker">Etapa 1</span>
+                <h3>Coleta programada</h3>
+                <p>Buscamos sua carga onde ela estiver, no horário combinado.</p>
+            </div>
+            <div class="jr-caption" data-from="0.28" data-to="0.48">
+                <span class="kicker">Etapa 2</span>
+                <h3>Rastreamento em tempo real</h3>
+                <p>Você acompanha cada quilômetro do trajeto.</p>
+            </div>
+            <div class="jr-caption" data-from="0.52" data-to="0.72">
+                <span class="kicker">Etapa 3</span>
+                <h3>Segurança em cada km</h3>
+                <p>Frota moderna e motoristas treinados cuidando do que é seu.</p>
+            </div>
+            <div class="jr-caption" data-from="0.76" data-to="0.97">
+                <span class="kicker">Etapa 4</span>
+                <h3>Entrega no prazo</h3>
+                <p>Sua carga no destino, sem surpresas.</p>
+            </div>
+
+            <div class="jr-route">
+                <div class="jr-route-track">
+                    <div class="jr-route-fill" id="jrFill"></div>
+                    <span class="jr-dot" style="left:2%" title="Coleta"></span>
+                    <span class="jr-dot" style="left:34.6%" title="Rastreamento"></span>
+                    <span class="jr-dot" style="left:67.3%" title="Segurança"></span>
+                    <span class="jr-dot" style="left:100%" title="Entrega"></span>
+                    <div class="jr-marker" id="jrMarker">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M18 18.5C18.83 18.5 19.5 17.83 19.5 17C19.5 16.17 18.83 15.5 18 15.5C17.17 15.5 16.5 16.17 16.5 17C16.5 17.83 17.17 18.5 18 18.5M19.5 9.5H17V12H21.46L19.5 9.5M6 18.5C6.83 18.5 7.5 17.83 7.5 17C7.5 16.17 6.83 15.5 6 15.5C5.17 15.5 4.5 16.17 4.5 17C4.5 17.83 5.17 18.5 6 18.5M20 8L23 12V17H21C21 18.66 19.66 20 18 20C16.34 20 15 18.66 15 17H9C9 18.66 7.66 20 6 20C4.34 20 3 18.66 3 17H1V6C1 4.89 1.89 4 3 4H17V8H20M3 6V15H3.76C4.31 14.39 5.11 14 6 14C6.89 14 7.69 14.39 8.24 15H15V6H3Z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="jr-done" id="jrDone">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+                    <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                Entrega concluída
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section class="section alt" id="sobre">
+        <div class="section-inner">
+            <div class="section-title reveal">Quem somos</div>
+            <h2 class="reveal" style="--rd:.05s">Mais de 4 anos conectando <span class="highlight">o Brasil</span></h2>
+            <p class="section-text reveal" style="--rd:.1s">
+                A FAP Transportes é especializada no transporte rodoviário de cargas em todo o território nacional.
+                Oferecemos soluções logísticas completas para empresas de todos os portes,
                 garantindo que cada carga chegue ao seu destino com segurança e pontualidade.
             </p>
 
-            <div class="stats fade-in">
-                <div class="stat-card">
-                    <div class="stat-number">15+</div>
+            <div class="stats">
+                <div class="stat-card reveal">
+                    <div class="stat-number" data-target="4" data-suffix="+">0+</div>
                     <div class="stat-label">Anos de Experiência</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">50k+</div>
+                <div class="stat-card reveal" style="--rd:.08s">
+                    <div class="stat-number" data-target="10" data-suffix="k+">0k+</div>
                     <div class="stat-label">Entregas Realizadas</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">500+</div>
+                <div class="stat-card reveal" style="--rd:.16s">
+                    <div class="stat-number" data-target="200" data-suffix="+">0+</div>
                     <div class="stat-label">Clientes Ativos</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">98%</div>
+                <div class="stat-card reveal" style="--rd:.24s">
+                    <div class="stat-number" data-target="98" data-suffix="%">0%</div>
                     <div class="stat-label">Satisfação</div>
                 </div>
             </div>
 
             <div class="values">
-                <div class="value-card fade-in">
-                    <div class="value-icon missao">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
+                <div class="value-card reveal">
+                    <div class="value-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z"/>
                         </svg>
                     </div>
                     <h3>Missão</h3>
                     <p>Oferecer soluções logísticas eficientes e confiáveis, conectando pessoas e negócios em todo o Brasil com excelência operacional.</p>
                 </div>
-                <div class="value-card fade-in">
-                    <div class="value-icon visao">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
+                <div class="value-card reveal" style="--rd:.1s">
+                    <div class="value-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
                         </svg>
                     </div>
                     <h3>Visão</h3>
                     <p>Ser referência nacional em transporte de cargas, reconhecida pela inovação tecnológica e compromisso com a satisfação do cliente.</p>
                 </div>
-                <div class="value-card fade-in">
-                    <div class="value-icon valores">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
+                <div class="value-card reveal" style="--rd:.2s">
+                    <div class="value-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                         </svg>
                     </div>
@@ -923,19 +1352,19 @@
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="services" id="servicos">
-        <div class="services-content">
-            <div class="section-title">NOSSOS SERVIÇOS</div>
-            <h2>Soluções completas em <span class="highlight">logística</span></h2>
-            <p class="services-text">
+    <!-- Serviços -->
+    <section class="section" id="servicos">
+        <div class="section-inner">
+            <div class="section-title reveal">Nossos serviços</div>
+            <h2 class="reveal" style="--rd:.05s">Soluções completas em <span class="highlight">logística</span></h2>
+            <p class="section-text reveal" style="--rd:.1s">
                 Oferecemos uma gama completa de serviços de transporte para atender às necessidades específicas do seu negócio.
             </p>
 
             <div class="service-cards">
-                <div class="service-card fade-in">
+                <div class="service-card reveal">
                     <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M18 18.5C18.83 18.5 19.5 17.83 19.5 17C19.5 16.17 18.83 15.5 18 15.5C17.17 15.5 16.5 16.17 16.5 17C16.5 17.83 17.17 18.5 18 18.5M19.5 9.5H17V12H21.46L19.5 9.5M6 18.5C6.83 18.5 7.5 17.83 7.5 17C7.5 16.17 6.83 15.5 6 15.5C5.17 15.5 4.5 16.17 4.5 17C4.5 17.83 5.17 18.5 6 18.5M20 8L23 12V17H21C21 18.66 19.66 20 18 20C16.34 20 15 18.66 15 17H9C9 18.66 7.66 20 6 20C4.34 20 3 18.66 3 17H1V6C1 4.89 1.89 4 3 4H17V8H20M3 6V15H3.76C4.31 14.39 5.11 14 6 14C6.89 14 7.69 14.39 8.24 15H15V6H3Z"/>
                         </svg>
                     </div>
@@ -948,9 +1377,9 @@
                     </div>
                 </div>
 
-                <div class="service-card fade-in">
+                <div class="service-card reveal" style="--rd:.07s">
                     <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
                         </svg>
                     </div>
@@ -963,9 +1392,9 @@
                     </div>
                 </div>
 
-                <div class="service-card fade-in">
+                <div class="service-card reveal" style="--rd:.14s">
                     <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/>
                         </svg>
                     </div>
@@ -978,9 +1407,9 @@
                     </div>
                 </div>
 
-                <div class="service-card fade-in">
+                <div class="service-card reveal" style="--rd:.21s">
                     <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                         </svg>
                     </div>
@@ -992,43 +1421,58 @@
                         <span class="tag">Last mile</span>
                     </div>
                 </div>
+
+                <div class="service-card reveal" style="--rd:.28s">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                        </svg>
+                    </div>
+                    <h3>Transporte Aéreo</h3>
+                    <p>Agilidade máxima para cargas urgentes, com embarque aéreo e conexões para todo o Brasil.</p>
+                    <div class="service-tags">
+                        <span class="tag">Cargas urgentes</span>
+                        <span class="tag">Agilidade</span>
+                        <span class="tag">Todo o Brasil</span>
+                    </div>
+                </div>
             </div>
 
-            <a href="https://wa.me/5511983191627?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento." target="_blank" class="btn-primary" style="margin-top: 2rem; display: inline-block;">
-                Solicitar Orçamento 
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <a href="https://wa.me/5511983191627?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento." target="_blank" rel="noopener" class="btn-primary reveal" style="--rd:.1s">
+                Solicitar Orçamento
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
             </a>
         </div>
     </section>
 
-    <!-- Contact Info Section -->
-    <section class="contact-info" id="contato">
-        <div class="contact-info-content">
-            <div class="section-title">CONTATO</div>
-            <h2>Entre em <span class="highlight">contato</span></h2>
-            <p class="contact-info-text">
+    <!-- Contato -->
+    <section class="section alt" id="contato">
+        <div class="section-inner">
+            <div class="section-title reveal">Contato</div>
+            <h2 class="reveal" style="--rd:.05s">Entre em <span class="highlight">contato</span></h2>
+            <p class="section-text reveal" style="--rd:.1s">
                 Estamos prontos para atender você. Entre em contato através de um de nossos canais ou visite-nos em nossa sede.
             </p>
 
             <div class="info-grid">
-                <div class="info-card fade-in">
+                <div class="info-card reveal">
                     <div class="info-card-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                         </svg>
                     </div>
                     <h3>Telefone</h3>
                     <p>
-                        <a href="tel:1123825644">(11) 2382-5644</a><br>
-                        <a href="https://wa.me/5511983191627" target="_blank">(11) 98319-1627 - Artur</a>
+                        <a href="tel:+551123825644">(11) 2382-5644</a><br>
+                        <a href="https://wa.me/5511983191627" target="_blank" rel="noopener">(11) 98319-1627 - Artur</a>
                     </p>
                 </div>
 
-                <div class="info-card fade-in">
+                <div class="info-card reveal" style="--rd:.08s">
                     <div class="info-card-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                         </svg>
                     </div>
@@ -1038,9 +1482,9 @@
                     </p>
                 </div>
 
-                <div class="info-card fade-in">
+                <div class="info-card reveal" style="--rd:.16s">
                     <div class="info-card-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                         </svg>
                     </div>
@@ -1051,9 +1495,9 @@
                     </p>
                 </div>
 
-                <div class="info-card fade-in">
+                <div class="info-card reveal" style="--rd:.24s">
                     <div class="info-card-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
                         </svg>
                     </div>
@@ -1065,14 +1509,14 @@
                 </div>
             </div>
 
-            <div class="map-section">
+            <div class="map-section reveal">
                 <h3>Visite nossa sede</h3>
-                <p style="color: #666; margin-bottom: 1.5rem;">Estamos localizados no coração de Guarulhos, com fácil acesso pelo metrô e principais vias.</p>
-                <div class="map-container fade-in">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3660.8753912345678!2d-46.52345678441943!3d-23.46789896346789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cef5f4c7654321%3A0x1234567890abcdef!2sRua%20Guararapes%2C%2059%20-%20Vila%20S%C3%A3o%20Rafael%2C%20Guarulhos%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1234567890123!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy"></iframe>
+                <p>Estamos localizados no coração de Guarulhos, com fácil acesso pelas principais vias.</p>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps?q=Rua+Guararapes+59,+Vila+S%C3%A3o+Rafael,+Guarulhos+-+SP&output=embed" allowfullscreen loading="lazy" title="Mapa: Rua Guararapes 59, Vila São Rafael, Guarulhos - SP"></iframe>
                 </div>
-                <a href="https://wa.me/5511983191627?text=Olá!%20Gostaria%20de%20falar%20com%20a%20FAP%20Transportes." target="_blank" class="whatsapp-btn">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <a href="https://wa.me/5511983191627?text=Olá!%20Gostaria%20de%20falar%20com%20a%20FAP%20Transportes." target="_blank" rel="noopener" class="whatsapp-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
                     </svg>
                     Falar pelo WhatsApp
@@ -1087,92 +1531,222 @@
             <div class="footer-grid">
                 <div class="footer-about">
                     <h3>
-                        <svg viewBox="0 0 24 24" fill="currentColor" style="width: 24px; height: 24px; display: inline-block; vertical-align: middle; margin-right: 0.5rem;">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M18 18.5C18.83 18.5 19.5 17.83 19.5 17C19.5 16.17 18.83 15.5 18 15.5C17.17 15.5 16.5 16.17 16.5 17C16.5 17.83 17.17 18.5 18 18.5M19.5 9.5H17V12H21.46L19.5 9.5M6 18.5C6.83 18.5 7.5 17.83 7.5 17C7.5 16.17 6.83 15.5 6 15.5C5.17 15.5 4.5 16.17 4.5 17C4.5 17.83 5.17 18.5 6 18.5M20 8L23 12V17H21C21 18.66 19.66 20 18 20C16.34 20 15 18.66 15 17H9C9 18.66 7.66 20 6 20C4.34 20 3 18.66 3 17H1V6C1 4.89 1.89 4 3 4H17V8H20M3 6V15H3.76C4.31 14.39 5.11 14 6 14C6.89 14 7.69 14.39 8.24 15H15V6H3Z"/>
                         </svg>
                         FAP Transportes
                     </h3>
-                    <p>Há mais de 15 anos conectando o Brasil com soluções logísticas eficientes, seguras e pontuais. Sua carga em boas mãos.</p>
-                    <div class="social-links">
-                        <a href="https://facebook.com" target="_blank" aria-label="Facebook">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
-                            </svg>
-                        </a>
-                        <a href="https://instagram.com" target="_blank" aria-label="Instagram">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
-                            </svg>
-                        </a>
-                        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
-                            </svg>
-                        </a>
-                        <a href="https://youtube.com" target="_blank" aria-label="YouTube">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/>
-                            </svg>
-                        </a>
-                    </div>
+                    <p>Há mais de 4 anos conectando o Brasil com soluções logísticas eficientes, seguras e pontuais. Sua carga em boas mãos.</p>
                 </div>
 
                 <div class="footer-links">
-                    <h4>Serviços</h4>
+                    <h4>Navegação</h4>
                     <ul>
-                        <li><a href="#inicio">Todos serviços</a></li>
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#jornada">A Jornada</a></li>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><a href="tel:+551123825644">(11) 2382-5644</a></li>
+                        <li><a href="https://wa.me/5511983191627" target="_blank" rel="noopener">(11) 98319-1627 (WhatsApp)</a></li>
+                        <li><a href="mailto:comercial2@faptransporte.com">comercial2@faptransporte.com</a></li>
+                        <li>Rua Guararapes 59 – Vila São Rafael, Guarulhos - SP</li>
+                        <li>Seg–Sex 08h–18h · Sáb 08h–12h</li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2024 FAP Transportes. Todos os direitos reservados.</p>
+                <p>&copy; 2026 FAP Transportes. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Botão flutuante -->
+    <a href="https://wa.me/5511983191627?text=Olá!%20Gostaria%20de%20falar%20com%20a%20FAP%20Transportes." target="_blank" rel="noopener" class="wa-float" aria-label="Falar pelo WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+    </a>
+
     <script>
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+        (function () {
+            'use strict';
 
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+            var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            /* ---------- Header ---------- */
+            var header = document.getElementById('header');
+            function onScrollHeader() {
+                if (window.scrollY > 40) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
             }
-        });
+            window.addEventListener('scroll', onScrollHeader, { passive: true });
+            onScrollHeader();
 
-        // Fade in on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+            /* ---------- Menu mobile ---------- */
+            var toggle = document.getElementById('navToggle');
+            var menu = document.getElementById('mobileMenu');
+            if (toggle && menu) {
+                toggle.addEventListener('click', function () {
+                    var open = menu.classList.toggle('open');
+                    toggle.classList.toggle('open', open);
+                    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                    document.body.style.overflow = open ? 'hidden' : '';
+                });
+                menu.querySelectorAll('a').forEach(function (a) {
+                    a.addEventListener('click', function () {
+                        menu.classList.remove('open');
+                        toggle.classList.remove('open');
+                        toggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    });
+                });
+            }
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+            /* ---------- Barra de progresso ---------- */
+            var bar = document.getElementById('scrollbar');
+            function onScrollBar() {
+                var h = document.documentElement.scrollHeight - window.innerHeight;
+                bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+            }
+            window.addEventListener('scroll', onScrollBar, { passive: true });
+            onScrollBar();
+
+            /* ---------- Reveal on scroll ---------- */
+            var revealEls = document.querySelectorAll('.reveal');
+            if (RM || !('IntersectionObserver' in window)) {
+                revealEls.forEach(function (el) { el.classList.add('in'); });
+            } else {
+                var io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (e) {
+                        if (e.isIntersecting) {
+                            e.target.classList.add('in');
+                            io.unobserve(e.target);
+                        }
+                    });
+                }, { threshold: .15, rootMargin: '0px 0px -40px 0px' });
+                revealEls.forEach(function (el) { io.observe(el); });
+            }
+
+            /* ---------- Contadores ---------- */
+            function animateCount(el) {
+                var target = parseFloat(el.getAttribute('data-target')) || 0;
+                var suffix = el.getAttribute('data-suffix') || '';
+                if (RM) { el.textContent = target + suffix; return; }
+                var dur = 1600;
+                var t0 = performance.now();
+                function tick(now) {
+                    var k = Math.min(1, (now - t0) / dur);
+                    var e = 1 - Math.pow(1 - k, 3);
+                    el.textContent = Math.round(target * e) + suffix;
+                    if (k < 1) requestAnimationFrame(tick);
                 }
-            });
-        }, observerOptions);
+                requestAnimationFrame(tick);
+            }
+            var counters = document.querySelectorAll('.stat-number');
+            if ('IntersectionObserver' in window && !RM) {
+                var cio = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (e) {
+                        if (e.isIntersecting) {
+                            animateCount(e.target);
+                            cio.unobserve(e.target);
+                        }
+                    });
+                }, { threshold: .5 });
+                counters.forEach(function (el) { cio.observe(el); });
+            } else {
+                counters.forEach(animateCount);
+            }
 
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
+            /* ---------- Cena da jornada (scroll conta a história) ---------- */
+            var journey = document.querySelector('.journey');
+            var farStrip = document.getElementById('farStrip');
+            var midStrip = document.getElementById('midStrip');
+            var dashStrip = document.getElementById('dashStrip');
+            var truckBody = document.getElementById('truckBody');
+            var wheels = [].slice.call(document.querySelectorAll('#truck .wheel'));
+            var captions = [].slice.call(document.querySelectorAll('.jr-caption'));
+            var jrFill = document.getElementById('jrFill');
+            var jrMarker = document.getElementById('jrMarker');
+            var jrDone = document.getElementById('jrDone');
+            var jrDots = [].slice.call(document.querySelectorAll('.jr-dot'));
+
+            if (journey && farStrip && !RM) {
+                var cur = 0, targetP = 0, ticking = true;
+                var WHEEL_CIRC = 2 * Math.PI * 38;
+
+                function ramp(p, from, to) {
+                    var edge = 0.05;
+                    if (p < from || p > to) return 0;
+                    var a = Math.min(1, (p - from) / edge);
+                    var b = Math.min(1, (to - p) / edge);
+                    return Math.min(a, b);
+                }
+
+                function readScroll() {
+                    var rect = journey.getBoundingClientRect();
+                    var total = journey.offsetHeight - window.innerHeight;
+                    if (total <= 0) { targetP = 0; return; }
+                    targetP = Math.max(0, Math.min(1, -rect.top / total));
+                }
+                window.addEventListener('scroll', readScroll, { passive: true });
+                window.addEventListener('resize', readScroll);
+                readScroll();
+
+                function frame() {
+                    cur += (targetP - cur) * 0.09;
+                    if (Math.abs(targetP - cur) < 0.0004) cur = targetP;
+
+                    var rect = journey.getBoundingClientRect();
+                    var onScreen = rect.bottom > 0 && rect.top < window.innerHeight;
+
+                    if (onScreen) {
+                        var dist = cur * 3000;
+                        farStrip.setAttribute('transform', 'translate(' + (-((cur * 400) % 2880)) + ',0)');
+                        midStrip.setAttribute('transform', 'translate(' + (-((cur * 1200) % 2880)) + ',0)');
+                        dashStrip.setAttribute('transform', 'translate(' + (-(dist % 150)) + ',0)');
+
+                        var deg = (dist / WHEEL_CIRC) * 360;
+                        wheels.forEach(function (w) {
+                            w.setAttribute('transform', 'rotate(' + deg + ' ' + w.getAttribute('data-cx') + ' ' + w.getAttribute('data-cy') + ')');
+                        });
+
+                        var bob = Math.sin(cur * 70) * 1.8;
+                        truckBody.setAttribute('transform', 'translate(0,' + bob + ')');
+
+                        captions.forEach(function (c) {
+                            var o = ramp(cur, parseFloat(c.getAttribute('data-from')), parseFloat(c.getAttribute('data-to')));
+                            c.style.opacity = o;
+                            c.style.transform = 'translate(-50%,' + ((1 - o) * 16) + 'px)';
+                        });
+
+                        var pct = cur * 100;
+                        jrFill.style.width = pct + '%';
+                        jrMarker.style.left = pct + '%';
+                        jrDots.forEach(function (d) {
+                            var at = parseFloat(d.style.left);
+                            d.classList.toggle('lit', pct >= at - 1);
+                        });
+                        jrDone.classList.toggle('show', cur > 0.93);
+                    }
+
+                    requestAnimationFrame(frame);
+                }
+                requestAnimationFrame(frame);
+            } else if (journey && RM) {
+                journey.classList.add('rm');
+                if (jrFill) jrFill.style.width = '100%';
+                if (jrMarker) jrMarker.style.left = '100%';
+                jrDots.forEach(function (d) { d.classList.add('lit'); });
+            }
+        })();
     </script>
 </body>
 </html>
