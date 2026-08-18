@@ -265,27 +265,12 @@
             display: flex;
             align-items: center;
             background:
-                radial-gradient(1100px 560px at 75% -10%, rgba(43, 147, 245, .10), transparent 65%),
-                linear-gradient(180deg, var(--navy-950) 0%, var(--navy-900) 55%, var(--navy-800) 100%);
+                linear-gradient(180deg, rgba(8, 20, 38, .88) 0%, rgba(8, 20, 38, .55) 50%, rgba(8, 20, 38, .92) 100%),
+                url('assets/hero-still.jpg') center / cover no-repeat,
+                var(--navy-950);
             color: #fff;
             padding: 9rem 2rem 5rem;
             overflow: hidden;
-        }
-
-        .hero-video {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 0;
-        }
-
-        .hero-shade {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(8, 20, 38, .84) 0%, rgba(8, 20, 38, .62) 45%, rgba(8, 20, 38, .88) 100%);
-            z-index: 0;
         }
 
         .hero-content {
@@ -387,11 +372,12 @@
             overflow: hidden;
         }
 
-        .journey-sticky svg.scene {
+        .journey-sticky canvas.scene {
             position: absolute;
             inset: 0;
             width: 100%;
             height: 100%;
+            background: #101d2b;
         }
 
         .jr-label {
@@ -920,7 +906,6 @@
                 transition-duration: .01ms !important;
             }
             .hero h1 .w, .hero .hero-overline, .hero p, .hero-buttons, .hero-facts { opacity: 1; transform: none; }
-            .hero-video { display: none; }
             .reveal { opacity: 1; transform: none; }
             .journey { height: 100vh; }
             .jr-caption:first-of-type { opacity: 1; transform: translate(-50%, 0); }
@@ -972,11 +957,6 @@
 
     <!-- Hero -->
     <section class="hero" id="inicio">
-        <video class="hero-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
-            <source src="assets/hero-truck.mp4" type="video/mp4">
-        </video>
-        <div class="hero-shade" aria-hidden="true"></div>
-
         <div class="hero-content">
             <p class="hero-overline">Transporte rodoviário de cargas · Guarulhos, SP</p>
             <h1>
@@ -1039,197 +1019,7 @@
     <!-- Jornada: cena do caminhão dirigida pelo scroll -->
     <section class="journey" id="jornada">
         <div class="journey-sticky">
-            <svg class="scene" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-                <defs>
-                    <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0" stop-color="#071223"/>
-                        <stop offset=".55" stop-color="#0d2342"/>
-                        <stop offset=".8" stop-color="#1c3f6b"/>
-                        <stop offset="1" stop-color="#2b5a8f"/>
-                    </linearGradient>
-                    <radialGradient id="glowG" cx=".5" cy=".5" r=".5">
-                        <stop offset="0" stop-color="#3b74b8" stop-opacity=".55"/>
-                        <stop offset="1" stop-color="#3b74b8" stop-opacity="0"/>
-                    </radialGradient>
-                    <linearGradient id="cabG" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0" stop-color="#2b93f5"/>
-                        <stop offset="1" stop-color="#1565c0"/>
-                    </linearGradient>
-                    <linearGradient id="beamG" x1="0" y1="0" x2="1" y2="0">
-                        <stop offset="0" stop-color="#ffd98a" stop-opacity=".55"/>
-                        <stop offset="1" stop-color="#ffd98a" stop-opacity="0"/>
-                    </linearGradient>
-
-                    <!-- Faixa do horizonte (repete a cada 2880px) -->
-                    <g id="farSet">
-                        <circle cx="140" cy="120" r="1.6" fill="#fff" opacity=".45"/>
-                        <circle cx="360" cy="80" r="1.3" fill="#fff" opacity=".35"/>
-                        <circle cx="560" cy="170" r="1.8" fill="#fff" opacity=".5"/>
-                        <circle cx="820" cy="60" r="1.4" fill="#fff" opacity=".4"/>
-                        <circle cx="1080" cy="140" r="1.5" fill="#fff" opacity=".35"/>
-                        <circle cx="1320" cy="90" r="1.7" fill="#fff" opacity=".45"/>
-                        <circle cx="1560" cy="160" r="1.3" fill="#fff" opacity=".4"/>
-                        <circle cx="1840" cy="70" r="1.6" fill="#fff" opacity=".5"/>
-                        <circle cx="2100" cy="130" r="1.4" fill="#fff" opacity=".35"/>
-                        <circle cx="2380" cy="90" r="1.7" fill="#fff" opacity=".45"/>
-                        <circle cx="2620" cy="150" r="1.3" fill="#fff" opacity=".4"/>
-                        <circle cx="2790" cy="110" r="1.5" fill="#fff" opacity=".35"/>
-
-                        <rect x="0" y="430" width="140" height="130" fill="#142f52"/>
-                        <rect x="160" y="380" width="110" height="180" fill="#142f52"/>
-                        <rect x="290" y="450" width="90" height="110" fill="#142f52"/>
-                        <rect x="400" y="350" width="150" height="210" fill="#142f52"/>
-                        <line x1="475" y1="350" x2="475" y2="316" stroke="#142f52" stroke-width="4"/>
-                        <rect x="570" y="420" width="120" height="140" fill="#142f52"/>
-                        <rect x="710" y="390" width="100" height="170" fill="#142f52"/>
-                        <rect x="830" y="460" width="140" height="100" fill="#142f52"/>
-                        <rect x="990" y="340" width="130" height="220" fill="#142f52"/>
-                        <rect x="1140" y="430" width="100" height="130" fill="#142f52"/>
-                        <rect x="1260" y="380" width="150" height="180" fill="#142f52"/>
-                        <rect x="1430" y="450" width="110" height="110" fill="#142f52"/>
-                        <rect x="1560" y="360" width="140" height="200" fill="#142f52"/>
-                        <line x1="1630" y1="360" x2="1630" y2="330" stroke="#142f52" stroke-width="4"/>
-                        <rect x="1720" y="440" width="120" height="120" fill="#142f52"/>
-                        <rect x="1860" y="400" width="100" height="160" fill="#142f52"/>
-                        <rect x="1980" y="340" width="160" height="220" fill="#142f52"/>
-                        <rect x="2160" y="430" width="120" height="130" fill="#142f52"/>
-                        <rect x="2300" y="390" width="110" height="170" fill="#142f52"/>
-                        <rect x="2430" y="460" width="140" height="100" fill="#142f52"/>
-                        <rect x="2590" y="370" width="130" height="190" fill="#142f52"/>
-                        <rect x="2740" y="440" width="140" height="120" fill="#142f52"/>
-
-                        <rect x="420" y="380" width="9" height="11" fill="#ffd98a" opacity=".32"/>
-                        <rect x="460" y="420" width="9" height="11" fill="#ffd98a" opacity=".28"/>
-                        <rect x="1010" y="370" width="9" height="11" fill="#ffd98a" opacity=".3"/>
-                        <rect x="1060" y="430" width="9" height="11" fill="#ffd98a" opacity=".26"/>
-                        <rect x="1290" y="410" width="9" height="11" fill="#ffd98a" opacity=".3"/>
-                        <rect x="1590" y="390" width="9" height="11" fill="#ffd98a" opacity=".3"/>
-                        <rect x="2010" y="370" width="9" height="11" fill="#ffd98a" opacity=".32"/>
-                        <rect x="2060" y="420" width="9" height="11" fill="#ffd98a" opacity=".26"/>
-                        <rect x="2330" y="420" width="9" height="11" fill="#ffd98a" opacity=".3"/>
-                        <rect x="2620" y="400" width="9" height="11" fill="#ffd98a" opacity=".28"/>
-                    </g>
-
-                    <!-- Faixa próxima: galpões, árvores e postes (repete a cada 2880px) -->
-                    <g id="midSet">
-                        <path d="M60 560 v-80 l90 -26 l90 26 v80 z" fill="#0d2038"/>
-                        <rect x="420" y="482" width="140" height="78" fill="#0d2038"/>
-                        <path d="M900 560 v-90 l100 -30 l100 30 v90 z" fill="#0d2038"/>
-                        <rect x="1400" y="482" width="160" height="78" fill="#0d2038"/>
-                        <path d="M1900 560 v-84 l95 -28 l95 28 v84 z" fill="#0d2038"/>
-                        <rect x="2400" y="484" width="150" height="76" fill="#0d2038"/>
-
-                        <rect x="316" y="518" width="8" height="42" fill="#0d2038"/>
-                        <ellipse cx="320" cy="500" rx="27" ry="32" fill="#0d2038"/>
-                        <rect x="696" y="514" width="8" height="46" fill="#0d2038"/>
-                        <ellipse cx="700" cy="494" rx="30" ry="35" fill="#0d2038"/>
-                        <rect x="1196" y="518" width="8" height="42" fill="#0d2038"/>
-                        <ellipse cx="1200" cy="500" rx="27" ry="32" fill="#0d2038"/>
-                        <rect x="1696" y="514" width="8" height="46" fill="#0d2038"/>
-                        <ellipse cx="1700" cy="494" rx="30" ry="35" fill="#0d2038"/>
-                        <rect x="2246" y="518" width="8" height="42" fill="#0d2038"/>
-                        <ellipse cx="2250" cy="500" rx="27" ry="32" fill="#0d2038"/>
-                        <rect x="2696" y="516" width="8" height="44" fill="#0d2038"/>
-                        <ellipse cx="2700" cy="496" rx="28" ry="33" fill="#0d2038"/>
-
-                        <g id="lampSet">
-                            <rect x="198" y="440" width="4" height="120" fill="#122c4e"/>
-                            <circle cx="200" cy="436" r="16" fill="#ffd98a" opacity=".1"/>
-                            <circle cx="200" cy="436" r="5" fill="#ffd98a" opacity=".85"/>
-                        </g>
-                        <use href="#lampSet" x="360"/>
-                        <use href="#lampSet" x="720"/>
-                        <use href="#lampSet" x="1080"/>
-                        <use href="#lampSet" x="1440"/>
-                        <use href="#lampSet" x="1800"/>
-                        <use href="#lampSet" x="2160"/>
-                        <use href="#lampSet" x="2520"/>
-                    </g>
-                </defs>
-
-                <!-- Céu -->
-                <rect x="0" y="0" width="1440" height="562" fill="url(#skyG)"/>
-                <ellipse cx="720" cy="562" rx="920" ry="130" fill="url(#glowG)"/>
-                <circle cx="1250" cy="118" r="70" fill="#dfe9f5" opacity=".07"/>
-                <circle cx="1250" cy="118" r="44" fill="#dfe9f5" opacity=".85"/>
-                <circle cx="1236" cy="106" r="9" fill="#c3d3e6" opacity=".7"/>
-                <circle cx="1262" cy="132" r="6" fill="#c3d3e6" opacity=".6"/>
-
-                <!-- Horizonte (parallax lento) -->
-                <g id="farStrip">
-                    <use href="#farSet"/>
-                    <use href="#farSet" x="2880"/>
-                </g>
-
-                <!-- Plano médio (parallax médio) -->
-                <g id="midStrip">
-                    <use href="#midSet"/>
-                    <use href="#midSet" x="2880"/>
-                </g>
-
-                <!-- Estrada -->
-                <rect x="0" y="560" width="1440" height="140" fill="#091425"/>
-                <line x1="0" y1="563" x2="1440" y2="563" stroke="#2a4a74" stroke-width="2"/>
-                <g id="dashStrip">
-                    <line x1="-160" y1="648" x2="6000" y2="648" stroke="#8fc4ff" stroke-width="6" stroke-dasharray="70 80" opacity=".45"/>
-                </g>
-
-                <!-- Caminhão -->
-                <g id="truck" transform="translate(150,0)">
-                    <ellipse cx="240" cy="606" rx="255" ry="13" fill="#000" opacity=".38"/>
-                    <g id="truckBody">
-                        <polygon points="474,516 780,554 780,614 474,542" fill="url(#beamG)" opacity=".3"/>
-                        <rect x="20" y="372" width="330" height="168" rx="12" fill="#f2f6fb" stroke="#c9d6e4" stroke-width="2"/>
-                        <line x1="103" y1="380" x2="103" y2="532" stroke="#dfe8f1" stroke-width="2"/>
-                        <line x1="186" y1="380" x2="186" y2="532" stroke="#dfe8f1" stroke-width="2"/>
-                        <line x1="269" y1="380" x2="269" y2="532" stroke="#dfe8f1" stroke-width="2"/>
-                        <rect x="20" y="506" width="330" height="16" fill="#1d7fe0"/>
-                        <text x="185" y="450" text-anchor="middle" font-family="Sora, Arial, sans-serif" font-size="44" font-weight="800" fill="#16365c" letter-spacing="2">FAP</text>
-                        <text x="185" y="484" text-anchor="middle" font-family="Sora, Arial, sans-serif" font-size="19" font-weight="700" fill="#1d7fe0" letter-spacing="6">TRANSPORTES</text>
-                        <rect x="14" y="516" width="7" height="16" rx="2" fill="#ff5a5a"/>
-                        <rect x="352" y="520" width="118" height="24" rx="4" fill="#0c1a2e"/>
-                        <rect x="356" y="438" width="9" height="84" rx="3" fill="#24466f"/>
-                        <path d="M366 540 v-96 q0 -14 14 -14 h42 q26 0 40 20 l15 23 q6 9 6 20 v47 z" fill="url(#cabG)" stroke="#10345c" stroke-width="2"/>
-                        <path d="M384 444 h34 q17 0 27 13 l11 17 h-72 z" fill="#bfe0ff" opacity=".95"/>
-                        <line x1="420" y1="478" x2="420" y2="536" stroke="#10345c" stroke-width="2" opacity=".55"/>
-                        <rect x="426" y="492" width="14" height="4" rx="2" fill="#0e2c50"/>
-                        <circle cx="470" cy="524" r="7" fill="#ffd98a"/>
-                        <rect x="462" y="534" width="16" height="15" rx="4" fill="#10345c"/>
-                    </g>
-                    <g class="wheel" data-cx="90" data-cy="562">
-                        <circle cx="90" cy="562" r="38" fill="#0b1729" stroke="#050b14" stroke-width="3"/>
-                        <circle cx="90" cy="562" r="21" fill="#1d3a63"/>
-                        <line x1="90" y1="543" x2="90" y2="581" stroke="#7cc0ff" stroke-width="4"/>
-                        <line x1="73.5" y1="552.5" x2="106.5" y2="571.5" stroke="#7cc0ff" stroke-width="4"/>
-                        <line x1="73.5" y1="571.5" x2="106.5" y2="552.5" stroke="#7cc0ff" stroke-width="4"/>
-                        <circle cx="90" cy="562" r="7" fill="#cfe4ff"/>
-                    </g>
-                    <g class="wheel" data-cx="162" data-cy="562">
-                        <circle cx="162" cy="562" r="38" fill="#0b1729" stroke="#050b14" stroke-width="3"/>
-                        <circle cx="162" cy="562" r="21" fill="#1d3a63"/>
-                        <line x1="162" y1="543" x2="162" y2="581" stroke="#7cc0ff" stroke-width="4"/>
-                        <line x1="145.5" y1="552.5" x2="178.5" y2="571.5" stroke="#7cc0ff" stroke-width="4"/>
-                        <line x1="145.5" y1="571.5" x2="178.5" y2="552.5" stroke="#7cc0ff" stroke-width="4"/>
-                        <circle cx="162" cy="562" r="7" fill="#cfe4ff"/>
-                    </g>
-                    <g class="wheel" data-cx="394" data-cy="562">
-                        <circle cx="394" cy="562" r="38" fill="#0b1729" stroke="#050b14" stroke-width="3"/>
-                        <circle cx="394" cy="562" r="21" fill="#1d3a63"/>
-                        <line x1="394" y1="543" x2="394" y2="581" stroke="#7cc0ff" stroke-width="4"/>
-                        <line x1="377.5" y1="552.5" x2="410.5" y2="571.5" stroke="#7cc0ff" stroke-width="4"/>
-                        <line x1="377.5" y1="571.5" x2="410.5" y2="552.5" stroke="#7cc0ff" stroke-width="4"/>
-                        <circle cx="394" cy="562" r="7" fill="#cfe4ff"/>
-                    </g>
-                    <g class="wheel" data-cx="450" data-cy="566">
-                        <circle cx="450" cy="566" r="34" fill="#0b1729" stroke="#050b14" stroke-width="3"/>
-                        <circle cx="450" cy="566" r="18" fill="#1d3a63"/>
-                        <line x1="450" y1="549" x2="450" y2="583" stroke="#7cc0ff" stroke-width="4"/>
-                        <line x1="435.5" y1="557.5" x2="464.5" y2="574.5" stroke="#7cc0ff" stroke-width="4"/>
-                        <line x1="435.5" y1="574.5" x2="464.5" y2="557.5" stroke="#7cc0ff" stroke-width="4"/>
-                        <circle cx="450" cy="566" r="6" fill="#cfe4ff"/>
-                    </g>
-                </g>
-            </svg>
+            <canvas class="scene" id="jrCanvas" aria-hidden="true"></canvas>
 
             <span class="jr-label">A jornada da sua carga</span>
 
@@ -1655,20 +1445,45 @@
 
             /* ---------- Cena da jornada (scroll conta a história) ---------- */
             var journey = document.querySelector('.journey');
-            var farStrip = document.getElementById('farStrip');
-            var midStrip = document.getElementById('midStrip');
-            var dashStrip = document.getElementById('dashStrip');
-            var truckBody = document.getElementById('truckBody');
-            var wheels = [].slice.call(document.querySelectorAll('#truck .wheel'));
+            var canvas = document.getElementById('jrCanvas');
+            var ctx = canvas && canvas.getContext ? canvas.getContext('2d') : null;
             var captions = [].slice.call(document.querySelectorAll('.jr-caption'));
             var jrFill = document.getElementById('jrFill');
             var jrMarker = document.getElementById('jrMarker');
             var jrDone = document.getElementById('jrDone');
             var jrDots = [].slice.call(document.querySelectorAll('.jr-dot'));
 
-            if (journey && farStrip && !RM) {
-                var cur = 0, targetP = 0, ticking = true;
-                var WHEEL_CIRC = 2 * Math.PI * 38;
+            /* Lista de quadros (o preview pode injetar window.JOURNEY_FRAMES) */
+            var srcs = [];
+            if (window.JOURNEY_FRAMES && window.JOURNEY_FRAMES.length) {
+                srcs = window.JOURNEY_FRAMES;
+            } else {
+                var step = (window.innerWidth < 700) ? 2 : 1;
+                for (var i = 1; i <= 99; i += step) {
+                    srcs.push('assets/journey/f-' + ('00' + i).slice(-3) + '.jpg');
+                }
+            }
+            var N = srcs.length;
+
+            function sizeCanvas() {
+                if (!canvas) return;
+                var dpr = Math.min(window.devicePixelRatio || 1, 2);
+                canvas.width = Math.round(window.innerWidth * dpr);
+                canvas.height = Math.round(window.innerHeight * dpr);
+            }
+
+            function drawCover(img) {
+                var cw = canvas.width, ch = canvas.height;
+                var scale = Math.max(cw / img.width, ch / img.height);
+                var w = img.width * scale, h = img.height * scale;
+                ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
+            }
+
+            if (journey && ctx && N && !RM) {
+                var cur = 0, targetP = 0;
+                var imgs = new Array(N);
+                var wanted = 0, lastDrawnIdx = -1;
+                var loadingStarted = false, nextToLoad = 0;
 
                 function ramp(p, from, to) {
                     var edge = 0.05;
@@ -1678,14 +1493,60 @@
                     return Math.min(a, b);
                 }
 
+                function drawFrame(idx) {
+                    var cw = canvas.width, ch = canvas.height;
+                    var k = -1, j;
+                    for (j = Math.min(idx, N - 1); j >= 0; j--) { if (imgs[j]) { k = j; break; } }
+                    if (k < 0) { for (j = idx + 1; j < N; j++) { if (imgs[j]) { k = j; break; } } }
+                    if (k < 0) {
+                        ctx.fillStyle = '#101d2b';
+                        ctx.fillRect(0, 0, cw, ch);
+                        return;
+                    }
+                    if (k === lastDrawnIdx) return;
+                    lastDrawnIdx = k;
+                    drawCover(imgs[k]);
+                }
+
+                /* Carregamento preguiçoso, 3 pistas em paralelo */
+                function loadNext() {
+                    if (nextToLoad >= N) return;
+                    var k = nextToLoad++;
+                    var img = new Image();
+                    img.onload = function () {
+                        imgs[k] = img;
+                        if (k === wanted || lastDrawnIdx < 0) drawFrame(wanted);
+                        loadNext();
+                    };
+                    img.onerror = function () { loadNext(); };
+                    img.src = srcs[k];
+                }
+
+                function startLoading() {
+                    if (loadingStarted) return;
+                    loadingStarted = true;
+                    var lanes = Math.min(3, N);
+                    for (var L = 0; L < lanes; L++) loadNext();
+                }
+
                 function readScroll() {
                     var rect = journey.getBoundingClientRect();
+                    if (rect.top < window.innerHeight * 1.5) startLoading();
                     var total = journey.offsetHeight - window.innerHeight;
                     if (total <= 0) { targetP = 0; return; }
                     targetP = Math.max(0, Math.min(1, -rect.top / total));
                 }
+
+                function onResize() {
+                    sizeCanvas();
+                    lastDrawnIdx = -1;
+                    drawFrame(wanted);
+                }
+
+                sizeCanvas();
                 window.addEventListener('scroll', readScroll, { passive: true });
                 window.addEventListener('resize', readScroll);
+                window.addEventListener('resize', onResize);
                 readScroll();
 
                 function frame() {
@@ -1696,18 +1557,8 @@
                     var onScreen = rect.bottom > 0 && rect.top < window.innerHeight;
 
                     if (onScreen) {
-                        var dist = cur * 3000;
-                        farStrip.setAttribute('transform', 'translate(' + (-((cur * 400) % 2880)) + ',0)');
-                        midStrip.setAttribute('transform', 'translate(' + (-((cur * 1200) % 2880)) + ',0)');
-                        dashStrip.setAttribute('transform', 'translate(' + (-(dist % 150)) + ',0)');
-
-                        var deg = (dist / WHEEL_CIRC) * 360;
-                        wheels.forEach(function (w) {
-                            w.setAttribute('transform', 'rotate(' + deg + ' ' + w.getAttribute('data-cx') + ' ' + w.getAttribute('data-cy') + ')');
-                        });
-
-                        var bob = Math.sin(cur * 70) * 1.8;
-                        truckBody.setAttribute('transform', 'translate(0,' + bob + ')');
+                        wanted = Math.round(cur * (N - 1));
+                        drawFrame(wanted);
 
                         captions.forEach(function (c) {
                             var o = ramp(cur, parseFloat(c.getAttribute('data-from')), parseFloat(c.getAttribute('data-to')));
@@ -1733,6 +1584,12 @@
                 if (jrFill) jrFill.style.width = '100%';
                 if (jrMarker) jrMarker.style.left = '100%';
                 jrDots.forEach(function (d) { d.classList.add('lit'); });
+                if (ctx && N) {
+                    sizeCanvas();
+                    var still = new Image();
+                    still.onload = function () { drawCover(still); };
+                    still.src = srcs[0];
+                }
             }
         })();
     </script>

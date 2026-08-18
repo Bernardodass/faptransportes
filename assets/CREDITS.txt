@@ -1,4 +1,5 @@
-﻿Video do hero: 'Cargo truck driving on the highway' (id 28787)
+﻿Imagem do hero: quadro do clipe 'Trailers on a foggy road' (id 1919)
+Quadros da secao jornada (scroll): clipe 'Cars and trucks crossing on a highway in nature' (id 44284)
 Fonte: https://mixkit.co/free-stock-video/trucks/
 Licenca: Mixkit Free License (uso comercial permitido, sem atribuicao obrigatoria)
-Baixado em 2026-08-14
+Processado em 2026-08-14 (ffmpeg: corte, escala e ajuste leve de cor)
