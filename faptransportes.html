@@ -8,7 +8,7 @@
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2316365c'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial' font-size='26' font-weight='bold' fill='%23ffffff'%3EFAP%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
     <style>
         :root {
             --navy-950: #081426;
@@ -23,7 +23,7 @@
             --surface: #f6f9fc;
             --line: #e3eaf2;
             --amber: #ffd98a;
-            --radius: 12px;
+            --radius: 8px;
             --ease-out: cubic-bezier(.2, .8, .2, 1);
         }
 
@@ -35,7 +35,7 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.65;
             color: var(--ink);
             background: #fff;
@@ -43,20 +43,9 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        h1, h2, h3, .logo { font-family: 'IBM Plex Sans', 'Inter', sans-serif; }
+        h1, h2, h3, .logo { font-family: 'IBM Plex Sans', sans-serif; }
 
         ::selection { background: rgba(43, 147, 245, .25); }
-
-        /* ============ Barra de progresso do scroll ============ */
-        #scrollbar {
-            position: fixed;
-            top: 0; left: 0;
-            height: 2px;
-            width: 0;
-            background: var(--blue-600);
-            z-index: 3000;
-            pointer-events: none;
-        }
 
         /* ============ Header ============ */
         header {
@@ -156,7 +145,7 @@
             background: #1565c0;
             color: #fff;
             padding: .8rem 1.6rem;
-            border-radius: 8px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
             font-size: .95rem;
@@ -183,7 +172,7 @@
             color: #fff;
             padding: .8rem 1.6rem;
             border: 1px solid rgba(255, 255, 255, .25);
-            border-radius: 8px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
             font-size: .95rem;
@@ -284,7 +273,7 @@
         .hero .hero-overline {
             font-size: .82rem;
             font-weight: 600;
-            letter-spacing: .14em;
+            letter-spacing: .06em;
             text-transform: uppercase;
             color: rgba(255, 255, 255, .55);
             margin-bottom: 1.6rem;
@@ -299,14 +288,8 @@
             font-weight: 700;
             margin-bottom: 1.6rem;
             max-width: 900px;
-        }
-
-        .hero h1 .w {
-            display: inline-block;
             opacity: 0;
-            transform: translateY(26px);
-            animation: riseIn .75s var(--ease-out) forwards;
-            animation-delay: var(--d, 0s);
+            animation: riseIn .8s var(--ease-out) .15s forwards;
         }
 
         @keyframes riseIn {
@@ -391,7 +374,7 @@
             color: var(--blue-300);
             font-size: .8rem;
             font-weight: 700;
-            letter-spacing: .18em;
+            letter-spacing: .08em;
             text-transform: uppercase;
             white-space: nowrap;
             z-index: 3;
@@ -420,7 +403,7 @@
             color: var(--blue-300);
             font-size: .85rem;
             font-weight: 700;
-            letter-spacing: .16em;
+            letter-spacing: .08em;
             text-transform: uppercase;
             margin-bottom: .6rem;
         }
@@ -460,7 +443,7 @@
             left: 0; top: 0;
             height: 100%;
             width: 0;
-            background: linear-gradient(90deg, var(--blue-600), var(--blue-300));
+            background: #1565c0;
             border-radius: 3px;
         }
 
@@ -486,9 +469,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--blue-500), #1565c0);
+            background: #1565c0;
             border-radius: 50%;
-            box-shadow: 0 4px 14px rgba(29, 127, 224, .5);
+            box-shadow: none;
         }
 
         .jr-marker svg { width: 18px; height: 18px; color: #fff; }
@@ -501,13 +484,12 @@
             display: inline-flex;
             align-items: center;
             gap: .5rem;
-            background: rgba(38, 176, 96, .14);
-            border: 1px solid rgba(75, 210, 130, .4);
+            background: transparent;
+            border: none;
             color: #6fe0a0;
             font-weight: 600;
             font-size: .92rem;
-            padding: .55rem 1.2rem;
-            border-radius: 999px;
+            padding: 0;
             opacity: 0;
             transition: opacity .5s ease, transform .5s var(--ease-out);
             z-index: 3;
@@ -521,17 +503,6 @@
         .section.alt { background: var(--surface); }
 
         .section-inner { max-width: 1400px; margin: 0 auto; }
-
-        .section-title {
-            display: inline-flex;
-            align-items: center;
-            font-size: .8rem;
-            color: var(--blue-600);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: .16em;
-            margin-bottom: 1rem;
-        }
 
         .section h2 {
             font-size: clamp(1.7rem, 3.4vw, 2.3rem);
@@ -587,42 +558,14 @@
         }
 
         .value-card {
-            background: #fff;
-            padding: 2.4rem 2rem;
-            border-radius: 14px;
-            border: 1px solid var(--line);
-            box-shadow: 0 1px 2px rgba(11, 29, 51, .04);
-            transition: box-shadow .35s ease, border-color .35s ease;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 0 0 0 1.4rem;
+            border-left: 2px solid var(--line);
+            border-radius: 0;
             text-align: left;
         }
-
-        .value-card:hover {
-            border-color: rgba(29, 127, 224, .45);
-            box-shadow: 0 10px 30px rgba(11, 29, 51, .08);
-        }
-
-        .value-icon {
-            width: 58px; height: 58px;
-            background: #e8f2fd;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.4rem;
-            transition: background .35s ease;
-        }
-
-        .value-card:hover .value-icon {
-            background: #1565c0;
-        }
-
-        .value-icon svg {
-            width: 28px; height: 28px;
-            color: #1565c0;
-            transition: color .35s ease;
-        }
-
-        .value-card:hover .value-icon svg { color: #fff; }
 
         .value-card h3 { font-size: 1.35rem; color: var(--ink); margin-bottom: .7rem; }
         .value-card p { color: var(--muted); font-size: .98rem; }
@@ -639,7 +582,7 @@
             position: relative;
             background: #fff;
             border: 1px solid var(--line);
-            border-radius: 14px;
+            border-radius: 8px;
             padding: 2.2rem 2rem;
             text-align: left;
             overflow: hidden;
@@ -651,38 +594,26 @@
             box-shadow: 0 10px 30px rgba(11, 29, 51, .08);
         }
 
-        .service-icon {
-            width: 58px; height: 58px;
-            background: #16365c;
-            border-radius: 14px;
+        .service-head {
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin-bottom: 1.4rem;
-            transition: background .35s ease;
+            gap: .7rem;
+            margin-bottom: .8rem;
         }
 
-        .service-card:hover .service-icon {
-            background: #1565c0;
+        .service-head svg {
+            width: 24px; height: 24px;
+            color: #14538f;
+            flex: none;
         }
 
-        .service-icon svg { width: 28px; height: 28px; color: #fff; }
+        .service-card h3 { font-size: 1.35rem; color: var(--ink); }
 
-        .service-card h3 { font-size: 1.35rem; color: var(--ink); margin-bottom: .7rem; }
+        .service-head h3 { margin: 0; }
 
-        .service-card p { color: var(--muted); margin-bottom: 1.4rem; font-size: .98rem; }
+        .service-card p:not(.service-meta) { color: var(--muted); margin-bottom: 1.4rem; font-size: .98rem; }
 
-        .service-tags { display: flex; flex-wrap: wrap; gap: .5rem; }
-
-        .tag {
-            background: #eef2f7;
-            color: #33516e;
-            padding: .35rem .8rem;
-            border-radius: 999px;
-            font-size: .82rem;
-            font-weight: 500;
-            transition: background .3s ease, color .3s ease;
-        }
+        .service-meta { color: #7a8aa0; font-size: .88rem; margin: 0; }
 
         /* Contato */
         .info-grid {
@@ -696,24 +627,14 @@
             position: relative;
             background: #fff;
             padding: 2.1rem 1.9rem;
-            border-radius: 14px;
+            border-radius: 8px;
             border: 1px solid var(--line);
             text-align: left;
             overflow: hidden;
-            transition: transform .4s var(--ease-out), box-shadow .4s ease;
+            transition: border-color .4s ease;
         }
 
-        .info-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, var(--blue-600), var(--navy-800));
-            opacity: 0;
-            transition: opacity .4s ease;
-        }
-
-        .info-card:hover { transform: translateY(-8px); box-shadow: 0 20px 44px rgba(29, 127, 224, .28); }
-        .info-card:hover::before { opacity: 1; }
+        .info-card:hover { border-color: rgba(20, 83, 143, .45); }
 
         .info-card > * { position: relative; z-index: 1; }
 
@@ -725,25 +646,15 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 1.1rem;
-            transition: background .4s ease, transform .4s var(--ease-out);
         }
 
-        .info-card:hover .info-card-icon {
-            background: rgba(255, 255, 255, .16);
-            transform: scale(1.08) rotate(5deg);
-        }
+        .info-card-icon svg { width: 23px; height: 23px; color: var(--navy-700); }
 
-        .info-card-icon svg { width: 23px; height: 23px; color: var(--navy-700); transition: color .4s ease; }
-        .info-card:hover .info-card-icon svg { color: #fff; }
+        .info-card h3 { font-size: 1.18rem; color: var(--ink); margin-bottom: .7rem; }
 
-        .info-card h3 { font-size: 1.18rem; color: var(--ink); margin-bottom: .7rem; transition: color .4s ease; }
-        .info-card:hover h3 { color: #fff; }
+        .info-card p { color: var(--muted); font-size: .96rem; }
 
-        .info-card p { color: var(--muted); font-size: .96rem; transition: color .4s ease; }
-        .info-card:hover p { color: rgba(255, 255, 255, .92); }
-
-        .info-card a { color: var(--blue-600); text-decoration: none; transition: color .4s ease; }
-        .info-card:hover a { color: #fff; text-decoration: underline; }
+        .info-card a { color: var(--blue-600); text-decoration: none; }
 
         .map-section { margin-top: 1rem; }
 
@@ -774,7 +685,7 @@
             background: #1fa855;
             color: #fff;
             padding: .95rem 2rem;
-            border-radius: 8px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
             margin-top: 1.8rem;
@@ -870,9 +781,8 @@
         /* ============ Reveal on scroll ============ */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity .75s ease, transform .75s var(--ease-out);
-            transition-delay: var(--rd, 0s);
+            transform: translateY(14px);
+            transition: opacity .5s ease, transform .5s var(--ease-out);
             will-change: opacity, transform;
         }
 
@@ -905,7 +815,7 @@
                 animation-iteration-count: 1 !important;
                 transition-duration: .01ms !important;
             }
-            .hero h1 .w, .hero .hero-overline, .hero p, .hero-buttons, .hero-facts { opacity: 1; transform: none; }
+            .hero h1, .hero .hero-overline, .hero p, .hero-buttons, .hero-facts { opacity: 1; transform: none; }
             .reveal { opacity: 1; transform: none; }
             .journey { height: 100vh; }
             .jr-caption:first-of-type { opacity: 1; transform: translate(-50%, 0); }
@@ -913,8 +823,6 @@
     </style>
 </head>
 <body>
-    <div id="scrollbar"></div>
-
     <!-- Header -->
     <header id="header">
         <nav>
@@ -958,20 +866,11 @@
     <!-- Hero -->
     <section class="hero" id="inicio">
         <div class="hero-content">
-            <p class="hero-overline">Transporte rodoviário de cargas · Guarulhos, SP</p>
-            <h1>
-                <span class="w" style="--d:.15s">Conectando cargas com</span><br>
-                <span class="w" style="--d:.3s"><span class="highlight">eficiência,</span> <span class="highlight">segurança</span> e</span><br>
-                <span class="w" style="--d:.45s"><span class="highlight">pontualidade</span></span>
-            </h1>
-            <p>Soluções logísticas completas para transporte rodoviário de cargas em todo território nacional. Sua carga em boas mãos.</p>
+            <p class="hero-overline">Transportadora · Guarulhos, SP</p>
+            <h1>Transporte rodoviário de cargas para todo o Brasil</h1>
+            <p>Coleta programada, rastreamento em tempo real e entrega no prazo. Há mais de 4 anos atendendo empresas de todos os portes.</p>
             <div class="hero-buttons">
-                <a href="https://wa.me/5511983191627?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento." target="_blank" rel="noopener" class="btn-primary">
-                    Solicitar Orçamento
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                </a>
+                <a href="https://wa.me/5511983191627?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento." target="_blank" rel="noopener" class="btn-primary">Solicitar Orçamento</a>
                 <a href="#servicos" class="btn-ghost">Nossos Serviços</a>
             </div>
 
@@ -1071,9 +970,8 @@
     <!-- Sobre -->
     <section class="section alt" id="sobre">
         <div class="section-inner">
-            <div class="section-title reveal">Quem somos</div>
-            <h2 class="reveal" style="--rd:.05s">Mais de 4 anos conectando <span class="highlight">o Brasil</span></h2>
-            <p class="section-text reveal" style="--rd:.1s">
+            <h2 class="reveal">Mais de 4 anos conectando <span class="highlight">o Brasil</span></h2>
+            <p class="section-text reveal">
                 A FAP Transportes é especializada no transporte rodoviário de cargas em todo o território nacional.
                 Oferecemos soluções logísticas completas para empresas de todos os portes,
                 garantindo que cada carga chegue ao seu destino com segurança e pontualidade.
@@ -1084,15 +982,15 @@
                     <div class="stat-number" data-target="4" data-suffix="+">0+</div>
                     <div class="stat-label">Anos de Experiência</div>
                 </div>
-                <div class="stat-card reveal" style="--rd:.08s">
+                <div class="stat-card reveal">
                     <div class="stat-number" data-target="10" data-suffix="k+">0k+</div>
                     <div class="stat-label">Entregas Realizadas</div>
                 </div>
-                <div class="stat-card reveal" style="--rd:.16s">
+                <div class="stat-card reveal">
                     <div class="stat-number" data-target="200" data-suffix="+">0+</div>
                     <div class="stat-label">Clientes Ativos</div>
                 </div>
-                <div class="stat-card reveal" style="--rd:.24s">
+                <div class="stat-card reveal">
                     <div class="stat-number" data-target="98" data-suffix="%">0%</div>
                     <div class="stat-label">Satisfação</div>
                 </div>
@@ -1100,29 +998,14 @@
 
             <div class="values">
                 <div class="value-card reveal">
-                    <div class="value-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z"/>
-                        </svg>
-                    </div>
                     <h3>Missão</h3>
                     <p>Oferecer soluções logísticas eficientes e confiáveis, conectando pessoas e negócios em todo o Brasil com excelência operacional.</p>
                 </div>
-                <div class="value-card reveal" style="--rd:.1s">
-                    <div class="value-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-                        </svg>
-                    </div>
+                <div class="value-card reveal">
                     <h3>Visão</h3>
                     <p>Ser referência nacional em transporte de cargas, reconhecida pela inovação tecnológica e compromisso com a satisfação do cliente.</p>
                 </div>
-                <div class="value-card reveal" style="--rd:.2s">
-                    <div class="value-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                        </svg>
-                    </div>
+                <div class="value-card reveal">
                     <h3>Valores</h3>
                     <p>Compromisso, transparência, segurança, pontualidade e respeito ao cliente são os pilares que guiam cada entrega que realizamos.</p>
                 </div>
@@ -1133,104 +1016,77 @@
     <!-- Serviços -->
     <section class="section" id="servicos">
         <div class="section-inner">
-            <div class="section-title reveal">Nossos serviços</div>
-            <h2 class="reveal" style="--rd:.05s">Soluções completas em <span class="highlight">logística</span></h2>
-            <p class="section-text reveal" style="--rd:.1s">
+            <h2 class="reveal">Soluções completas em <span class="highlight">logística</span></h2>
+            <p class="section-text reveal">
                 Oferecemos uma gama completa de serviços de transporte para atender às necessidades específicas do seu negócio.
             </p>
 
             <div class="service-cards">
                 <div class="service-card reveal">
-                    <div class="service-icon">
+                    <div class="service-head">
                         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M18 18.5C18.83 18.5 19.5 17.83 19.5 17C19.5 16.17 18.83 15.5 18 15.5C17.17 15.5 16.5 16.17 16.5 17C16.5 17.83 17.17 18.5 18 18.5M19.5 9.5H17V12H21.46L19.5 9.5M6 18.5C6.83 18.5 7.5 17.83 7.5 17C7.5 16.17 6.83 15.5 6 15.5C5.17 15.5 4.5 16.17 4.5 17C4.5 17.83 5.17 18.5 6 18.5M20 8L23 12V17H21C21 18.66 19.66 20 18 20C16.34 20 15 18.66 15 17H9C9 18.66 7.66 20 6 20C4.34 20 3 18.66 3 17H1V6C1 4.89 1.89 4 3 4H17V8H20M3 6V15H3.76C4.31 14.39 5.11 14 6 14C6.89 14 7.69 14.39 8.24 15H15V6H3Z"/>
                         </svg>
+                        <h3>Transporte Rodoviário</h3>
                     </div>
-                    <h3>Transporte Rodoviário</h3>
                     <p>Frota moderna e motoristas experientes para transporte seguro de cargas em todo território nacional.</p>
-                    <div class="service-tags">
-                        <span class="tag">Frota rastreada</span>
-                        <span class="tag">Motoristas treinados</span>
-                        <span class="tag">Cobertura nacional</span>
-                    </div>
+                    <p class="service-meta">Frota rastreada · Motoristas treinados · Cobertura nacional</p>
                 </div>
 
-                <div class="service-card reveal" style="--rd:.07s">
-                    <div class="service-icon">
+                <div class="service-card reveal">
+                    <div class="service-head">
                         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
                         </svg>
+                        <h3>Cargas Fracionadas</h3>
                     </div>
-                    <h3>Cargas Fracionadas</h3>
                     <p>Solução ideal para volumes menores, com coleta e entrega programadas e custo otimizado.</p>
-                    <div class="service-tags">
-                        <span class="tag">Coleta programada</span>
-                        <span class="tag">Custo-benefício</span>
-                        <span class="tag">Flexibilidade</span>
-                    </div>
+                    <p class="service-meta">Coleta programada · Custo-benefício · Flexibilidade</p>
                 </div>
 
-                <div class="service-card reveal" style="--rd:.14s">
-                    <div class="service-icon">
+                <div class="service-card reveal">
+                    <div class="service-head">
                         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/>
                         </svg>
+                        <h3>Carga Completa</h3>
                     </div>
-                    <h3>Carga Completa</h3>
                     <p>Transporte dedicado para cargas que ocupam a capacidade total do veículo, com prazos exclusivos.</p>
-                    <div class="service-tags">
-                        <span class="tag">Veículo dedicado</span>
-                        <span class="tag">Prazo personalizado</span>
-                        <span class="tag">Prioridade máxima</span>
-                    </div>
+                    <p class="service-meta">Veículo dedicado · Prazo personalizado · Prioridade máxima</p>
                 </div>
 
-                <div class="service-card reveal" style="--rd:.21s">
-                    <div class="service-icon">
+                <div class="service-card reveal">
+                    <div class="service-head">
                         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                         </svg>
+                        <h3>Logística e Distribuição</h3>
                     </div>
-                    <h3>Logística e Distribuição</h3>
                     <p>Gestão completa da sua cadeia logística, desde a coleta até a entrega final ao destinatário.</p>
-                    <div class="service-tags">
-                        <span class="tag">Gestão integrada</span>
-                        <span class="tag">Armazenagem</span>
-                        <span class="tag">Last mile</span>
-                    </div>
+                    <p class="service-meta">Gestão integrada · Armazenagem · Last mile</p>
                 </div>
 
-                <div class="service-card reveal" style="--rd:.28s">
-                    <div class="service-icon">
+                <div class="service-card reveal">
+                    <div class="service-head">
                         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
                         </svg>
+                        <h3>Transporte Aéreo</h3>
                     </div>
-                    <h3>Transporte Aéreo</h3>
                     <p>Agilidade máxima para cargas urgentes, com embarque aéreo e conexões para todo o Brasil.</p>
-                    <div class="service-tags">
-                        <span class="tag">Cargas urgentes</span>
-                        <span class="tag">Agilidade</span>
-                        <span class="tag">Todo o Brasil</span>
-                    </div>
+                    <p class="service-meta">Cargas urgentes · Agilidade · Todo o Brasil</p>
                 </div>
             </div>
 
-            <a href="https://wa.me/5511983191627?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento." target="_blank" rel="noopener" class="btn-primary reveal" style="--rd:.1s">
-                Solicitar Orçamento
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-            </a>
+            <a href="https://wa.me/5511983191627?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento." target="_blank" rel="noopener" class="btn-primary reveal">Solicitar Orçamento</a>
         </div>
     </section>
 
     <!-- Contato -->
     <section class="section alt" id="contato">
         <div class="section-inner">
-            <div class="section-title reveal">Contato</div>
-            <h2 class="reveal" style="--rd:.05s">Entre em <span class="highlight">contato</span></h2>
-            <p class="section-text reveal" style="--rd:.1s">
+            <h2 class="reveal">Entre em <span class="highlight">contato</span></h2>
+            <p class="section-text reveal">
                 Estamos prontos para atender você. Entre em contato através de um de nossos canais ou visite-nos em nossa sede.
             </p>
 
@@ -1248,7 +1104,7 @@
                     </p>
                 </div>
 
-                <div class="info-card reveal" style="--rd:.08s">
+                <div class="info-card reveal">
                     <div class="info-card-icon">
                         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
@@ -1260,7 +1116,7 @@
                     </p>
                 </div>
 
-                <div class="info-card reveal" style="--rd:.16s">
+                <div class="info-card reveal">
                     <div class="info-card-icon">
                         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
@@ -1273,7 +1129,7 @@
                     </p>
                 </div>
 
-                <div class="info-card reveal" style="--rd:.24s">
+                <div class="info-card reveal">
                     <div class="info-card-icon">
                         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
@@ -1387,15 +1243,6 @@
                     });
                 });
             }
-
-            /* ---------- Barra de progresso ---------- */
-            var bar = document.getElementById('scrollbar');
-            function onScrollBar() {
-                var h = document.documentElement.scrollHeight - window.innerHeight;
-                bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
-            }
-            window.addEventListener('scroll', onScrollBar, { passive: true });
-            onScrollBar();
 
             /* ---------- Reveal on scroll ---------- */
             var revealEls = document.querySelectorAll('.reveal');
