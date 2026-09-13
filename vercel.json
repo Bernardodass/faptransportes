@@ -1,0 +1,5 @@
+{
+  "redirects": [
+    { "source": "/faptransportes.html", "destination": "/", "permanent": true }
+  ]
+}
